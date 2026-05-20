@@ -1,0 +1,113 @@
+.container {
+    align-items: center;
+}
+
+.container-conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 88vh;
+    margin-top: 12vh;
+}
+
+.container-conteudo h1 {
+    margin-bottom: 5%;
+    margin-top: -3%;
+    font-family: 'constantia';
+    font-size: 35px;
+    color: rgb(255, 255, 255);
+}
+
+.container-conteudo span {
+    color: rgb(255, 171, 26);
+}
+
+.cards-quiz {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    display: 100vh;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 250px;
+    height: 350px;
+    border: solid 1px rgba(255, 171, 26, 0.5);
+    border-radius: 10px;
+}
+
+.gow1 {
+    background-image: url('../assets/img/cards/quiz_gow1_card.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 1s;
+}
+
+.gow2 {
+    background-image: url('../assets/img/cards/quiz_gow2_card.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 1s;
+}
+
+.gow3 {
+    background-image: url('../assets/img/cards/quiz_gow3_card.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 1s;
+}
+
+.gow18 {
+    background-image: url('../assets/img/cards/quiz_gow_card.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 1s;
+}
+
+.gow-rag {
+    background-image: url('../assets/img/cards/quiz_gowRag_card.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 1s;
+}
+
+.btn-entrar {
+    margin-bottom: 30px;
+    background-color: rgb(194, 0, 17);
+    color: rgb(255, 255, 255);
+    font-family: 'constantia';
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    width: 130px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.logo-cards {
+    width: 200px;
+    margin-bottom: 20px;
+    background: linear-gradient(to right,  rgba(0, 0, 0, 0), rgb(61, 0, 5), rgb(88, 0, 7), rgb(100, 0, 8), rgb(128, 0, 11), rgb(151, 0, 13), rgb(151, 0, 13), rgb(151, 0, 13), rgb(128, 0, 11), rgb(100, 0, 8), rgb(88, 0, 7), rgb(61, 0, 5), rgba(0, 0, 0, 0));
+}
+
+.btn-entrar:hover {
+    background-color: rgb(151, 0, 13);
+}
+
+.card:has(.btn-entrar:hover) {
+    background-size: 103%;
+}

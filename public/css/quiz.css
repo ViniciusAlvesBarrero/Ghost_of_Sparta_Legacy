@@ -1,0 +1,339 @@
+body {
+    margin: 0;
+}
+
+.fundo {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    box-shadow: inset 700px 0 100px 0 rgb(0, 0, 0),
+        inset 700px 0 100px 100vh rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+.fundo-quiz1 {
+    background-image: url("../assets/img/background/fundo_quiz1.png");
+}
+
+.fundo-quiz2 {
+    background-image: url("../assets/img/background/fundo_quiz2.png");
+}
+
+.back-img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+
+.back-img:hover {
+    filter: brightness(1.1);
+    width: 52px;
+    height: 52px;
+}
+
+.btn-voltar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 100px;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    border: none;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 12vh;
+    background-color: rgb(0, 0, 0);
+    border-bottom: solid 2px rgba(39, 39, 39);
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    user-select: none;
+    pointer-events: none;
+}
+
+.titulo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    overflow: hidden;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.header p {
+    margin-top: 8px;
+    margin-left: 10px;
+    font-size: 25px;
+    font-family: 'constantia';
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.qtd-questao p {
+    font-size: 20px;
+    font-family: 'constantia';
+    font-weight: bold;
+    color: rgb(126, 134, 126);
+    margin-right: 100px;
+}
+
+.container-jogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 76%;
+    height: 100vh;
+    color: rgb(255, 255, 255);
+}
+
+.pergunta {
+    color: rgb(255, 255, 255);
+    font-family: 'constantia';
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-shadow: 0 0 50px rgba(249, 173, 38, 0.3);
+}
+
+.divisoria {
+    width: 400px;
+    height: 2px;
+    margin: 30px 0 -10px 0;
+    border: none;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(255, 0, 0), rgb(249, 173, 38), rgb(249, 173, 38), rgb(249, 173, 38), rgb(255, 0, 0), rgba(0, 0, 0, 0));
+}
+
+.texto {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 30px;
+}
+
+.container-alternativas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 30px;
+}
+
+.card-opcao {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 500px;
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: solid 1px rgba(249, 173, 38, 0.3);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 0 30px 3px rgba(249, 173, 38, 0.1);
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.radio {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 85%;
+    cursor: pointer;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 80%;
+    height: 85%;
+    left: 55px;
+    cursor: pointer;
+    font-size: 25px;
+    word-wrap: break-word;
+    word-break: break-word;
+    padding: 10px;
+    margin-left: 20px;
+    transition: 2s;
+}
+
+.img-alternativa {
+    width: 90px;
+    margin: -10px 0 0 -25px;
+    user-select: none;
+    pointer-events: none;
+    transform: rotate(45deg);
+    opacity: 0.7;
+    transition: 1s;
+}
+
+.card-opcao:has(.radio:checked) {
+    border: solid 1px rgba(151, 0, 13, 0.3);
+    box-shadow: 0 0 30px 3px rgba(151, 0, 13, 0.1);
+    background-image: url('../assets/img/background/fundo_opcao_questao.png');
+    background-position: center;
+    background-size: cover;
+}
+
+.card-opcao:has(.radio:hover) {
+    border: solid 1px rgba(151, 0, 13, 0.3);
+}
+
+.card-opcao:has(.radio:checked) .img-alternativa {
+    margin-left: -50px;
+    opacity: 0;
+}
+
+.card-opcao:has(.radio:checked) .option {
+    margin-left: -65px;
+    left: 80px;
+}
+
+.btn-prox {
+    border: none;
+    width: 155px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 20px 0 0 85%;
+    background-color: rgb(194, 0, 17);
+    color: rgb(255, 255, 255);
+    font-family: 'constantia';
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.btn-prox:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.container-mensagem-final {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    top: 15%;
+    width: 70%;
+    height: 70vh;
+    border-radius: 10px;
+    border: solid 1px rgb(33, 72, 110, 0.4);
+    background-color: rgb(14, 16, 26);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.container-mensagem-final h1 {
+    color: rgb(255, 255, 255);
+    font-family: 'constantia';
+    font-size: 50px;
+    margin: 50px 0 70px 0;
+}
+
+.container-mensagem-final .mensagem-concluido {
+    color: rgb(249, 173, 38);
+    font-size: 60px;
+    margin: 20px 0 70px 0;
+}
+
+.container-mensagem-final h2 {
+    color: rgb(249, 173, 38);
+    font-family: 'constantia';
+}
+
+.container-mensagem-final h3 {
+    color: rgb(255, 255, 255);
+    font-family: 'constantia';
+    font-size: 23px;
+}
+
+.container-mensagem-final .numero-mensagem {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container-recompensa {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.btn-recompensa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    height: 130px;
+    width: 300px;
+    border: none;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.recompensa-img {
+    width: 300px;
+    height: auto;
+    transition: 0.5s;
+}
+
+.btn-recompensa:hover .recompensa-img {
+    filter: brightness(1.3);
+    width: 310px;
+}
+
+.container-btn-finalizar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+    margin: 80px 0 0 0;
+}
+
+.container-btn-finalizar button {
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(194, 0, 17);
+    color: rgb(255, 255, 255);
+    font-family: 'constantia';
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.container-btn-finalizar button:hover {
+    background-color: rgb(151, 0, 13);
+}
+
+.fundo-logo {
+    position: absolute;
+    z-index: -1;
+    top: -100px;
+    width: 630px;
+    transform: rotate(45deg);
+    opacity: 0.15;
+}

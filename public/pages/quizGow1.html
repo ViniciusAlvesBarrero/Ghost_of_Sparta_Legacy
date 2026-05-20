@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/img/icon/flavicon.png" type="image/png">
+    <link rel="stylesheet" href="../css/quiz.css">
+    <title>Quiz - God of War I</title>
+</head>
+
+<body onload="iniciarQuiz()">
+
+    <div class="fundo fundo-quiz1">
+
+        <div class="container-mensagem-final" id="containerMensagem">
+            <h1>Escolha sua recompensa</h1>
+            <div class="container-recompensa">
+                <button class="btn-recompensa" id="bau1" onclick="gerarXp(this)"><img
+                        src="../assets/img/icon/bauIcon.png" class="recompensa-img"></button>
+                <button class="btn-recompensa" id="bau2" onclick="gerarXp(this)"><img
+                        src="../assets/img/icon/bauIcon.png" class="recompensa-img"></button>
+                <button class="btn-recompensa" id="bau3" onclick="gerarXp(this)"><img
+                        src="../assets/img/icon/bauIcon.png" class="recompensa-img"></button>
+            </div>
+        </div>
+
+        <a href="hubQuiz.html">
+            <button class="btn-voltar" id="backBtn"><img class="back-img" src="../assets/img/icon/backBtn.png"></button>
+        </a>
+
+        <div class="header">
+            <div class="titulo">
+                <img src="../assets/img/icon/flavicon.png" class="logo">
+                <p>Quiz - God of War I</p>
+            </div>
+            <div class="qtd-questao">
+                <p><span id="spanNumeroDaQuestaoAtual"></span> / <span id="qtdQuestoes"></span></p>
+            </div>
+        </div>
+
+        <div id="jogo" class="container-jogo">
+
+            <div id="perguntaDaQuestaoAtual" class="pergunta">
+                <span id="spanQuestaoExibida"></span>
+                <div class="divisoria"></div>
+            </div>
+
+            <p class="texto">Marque a alternativa correta:</p>
+
+            <div id="opcoes" class="container-alternativas">
+                <div class="card-opcao" id="cardOpcao">
+                    <img src="../assets/img/icon/logoDourado.png" class="img-alternativa">
+                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA"
+                        onclick="submeter()" />
+                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+                </div>
+                <div class="card-opcao" id="cardOpcao">
+                    <img src="../assets/img/icon/laminasIcon.png" class="img-alternativa">
+                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB"
+                        onclick="submeter()" />
+                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+                </div>
+                <div class="card-opcao" id="cardOpcao">
+                    <img src="../assets/img/icon/leviataIcon.png" class="img-alternativa">
+                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC"
+                        onclick="submeter()" />
+                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+                </div>
+                <div class="card-opcao" id="cardOpcao">
+                    <img src="../assets/img/icon/iconKratos2.png" class="img-alternativa">
+                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD"
+                        onclick="submeter()" />
+                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                </div>
+            </div>
+
+            <button onclick="avancar()" id="btnProx" class="btn-prox" disabled>Próxima questão</button>
+
+        </div>
+
+</body>
+
+</html>
+
+<script>
+
+    const numQuiz = 1;
+
+    const listaDeQuestoes = [
+
+        {
+            pergunta: "Quem é o principal antagonista de God of War 1?",
+            alternativaA: "Hades",
+            alternativaB: "Ares",
+            alternativaC: "Poseidon",
+            alternativaD: "Zeus",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            pergunta: "Qual arma Kratos recebe de Atena no início do jogo?",
+            alternativaA: "Lâminas do Olimpo",
+            alternativaB: "Lâmina do Caos",
+            alternativaC: "Martelo de Bárbaro",
+            alternativaD: "Garras de Hades",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            pergunta: "Qual criatura Kratos enfrenta na primeira fase do jogo?",
+            alternativaA: "Ciclope",
+            alternativaB: "Cérbero",
+            alternativaC: "Minotauro",
+            alternativaD: "Hidra",
+            alternativaCorreta: "alternativaD"
+        },
+
+        {
+            pergunta: "Quem guia e auxilia Kratos durante sua jornada?",
+            alternativaA: "Afrodite",
+            alternativaB: "Gaia",
+            alternativaC: "Atena",
+            alternativaD: "Perséfone",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {
+            pergunta: "O que Kratos busca ao derrotar Ares?",
+            alternativaA: "Se tornar rei de Esparta",
+            alternativaB: "Libertação de seus pesadelos",
+            alternativaC: "Encontrar Atreus",
+            alternativaD: "Conquistar o Olimpo",
+            alternativaCorreta: "alternativaB"
+        }
+
+    ]
+
+    // variáveis globais    
+    let numeroDaQuestaoAtual = 0
+    let certas = 0
+    let quantidadeDeQuestoes = listaDeQuestoes.length
+    let qtdXp = 0;
+
+    function iniciarQuiz() {
+
+        document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
+
+        preencherHTMLcomQuestaoAtual(0)
+
+        btnProx.disabled = true
+    }
+
+    function preencherHTMLcomQuestaoAtual(index) {
+        const questaoAtual = listaDeQuestoes[index]
+        numeroDaQuestaoAtual = index
+        console.log("questaoAtual")
+        console.log(questaoAtual)
+        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
+        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
+        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
+        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
+        document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
+    }
+
+    function submeter() {
+        const options = document.getElementsByName("option"); // recupera alternativas no html
+
+        let hasChecked = false
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                hasChecked = true
+                break
+            }
+        }
+
+        if (!hasChecked) {
+            alert("Não há alternativas escolhidas. Escolha uma opção.")
+        } else {
+            btnProx.disabled = false
+        }
+    }
+
+
+    function avancar() {
+        btnProx.disabled = true
+
+        checarResposta()
+
+        desmarcarRadioButtons()
+
+        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+        } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+            btnProx.innerHTML = `Finalizar`
+        } else {
+            finalizarJogo()
+        }
+    }
+
+    function tentarNovamente() {
+        // atualiza a página
+        window.location.reload()
+    }
+
+    function checarResposta() {
+        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
+        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
+
+        const options = document.getElementsByName("option"); // recupera alternativas no html
+        let tamanhoOptions = options.length
+
+        let alternativaCorreta = null // variável para armazenar a alternativa correta
+
+        for (let i = 0; i < tamanhoOptions; i++) {
+            if (options[i].value === respostaQuestaoAtual) {
+                console.log("alternativaCorreta está no componente: " + alternativaCorreta)
+                alternativaCorreta = options[i].labels[0].id
+            }
+        }
+
+        // verifica se resposta assinalada é correta
+        for (let i = 0; i < tamanhoOptions; i++) {
+            if (options[i].checked === true && options[i].value === respostaQuestaoAtual) {
+                certas++
+                numeroDaQuestaoAtual++
+            } else if (options[i].checked && options[i].value !== respostaQuestaoAtual) {
+                numeroDaQuestaoAtual++
+            }
+        }
+    }
+
+    function desmarcarRadioButtons() {
+        const options = document.getElementsByName("option");
+        for (let i = 0; i < options.length; i++) {
+            options[i].checked = false;
+        }
+    }
+
+    function finalizarJogo() {
+        let textoParaMensagemFinal = null
+        const cards = document.getElementsByClassName("card-opcao");
+
+        primeiraOpcao.disabled = true
+        segundaOpcao.disabled = true
+        terceiraOpcao.disabled = true
+        quartaOpcao.disabled = true
+        backBtn.style.pointerEvents = "none"
+
+
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].style.pointerEvents = "none";
+        }
+
+        if (certas == 0) {
+            containerMensagem.style.display = "flex"
+            containerMensagem.innerHTML = `
+            <img src="../assets/img/icon/flavicon.png" class="fundo-logo">
+            <h1 class="mensagem-concluido">Quiz concluído!</h1>
+            <h3>Quantidade de acertos: <span class="numero-mensagem">${certas}</span></h3>
+            <h3>Continue treinando, guerreiro.</h3>
+            <div class="container-btn-finalizar">
+            <button onclick="tentarNovamente()" id="btnTentarNovamente">Tentar novamente</button>
+            <a href="hubQuiz.html"><button>Sair</button></a>
+            </div>
+            `;
+        } else {
+            containerMensagem.style.display = "flex"
+        }
+
+        btnProx.disabled = true
+
+    }
+
+    function gerarXp(botao) {
+        let idBotao = botao.id;
+        const porcentagemFinalDeAcertos = certas / quantidadeDeQuestoes
+        let numAleatorio1 = Math.round(Math.random() * (certas * 20));
+        let numAleatorio2 = Math.round(Math.random() * (certas * 20));
+        let numAleatorio3 = Math.round(Math.random() * (certas * 20));
+
+        if (porcentagemFinalDeAcertos <= 0.3) {
+            if (idBotao == "bau1") {
+                qtdXp = numAleatorio1;
+            } else if (idBotao == "bau2") {
+                qtdXp = numAleatorio2;
+            } else if (idBotao == "bau3") {
+                qtdXp = numAleatorio3;
+            }
+        } else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.7) {
+            if (idBotao == "bau1") {
+                qtdXp = numAleatorio1 * 2;
+            } else if (idBotao == "bau2") {
+                qtdXp = numAleatorio2 * 2;
+            } else if (idBotao == "bau3") {
+                qtdXp = numAleatorio3 * 2;
+            }
+        } else if (porcentagemFinalDeAcertos >= 0.7) {
+            if (idBotao == "bau1") {
+                qtdXp = numAleatorio1 * 3;
+            } else if (idBotao == "bau2") {
+                qtdXp = numAleatorio2 * 3;
+            } else if (idBotao == "bau3") {
+                qtdXp = numAleatorio3 * 3;
+            }
+        }
+
+        registrar();
+        somarXp();
+
+        containerMensagem.innerHTML = `
+            <img src="../assets/img/icon/flavicon.png" class="fundo-logo">
+            <h1 class="mensagem-concluido">Quiz concluído!</h1>
+            <h3>Quantidade de acertos: ${certas}</h3>
+            <h2>Você conseguiu <span class="numero-mensagem">${qtdXp}</span> XP no baú escolhido</h2>
+            <div class="container-btn-finalizar">
+            <button onclick="tentarNovamente()" id="btnTentarNovamente">Tentar novamente</button>
+            <a href="hubQuiz.html"><button>Sair</button></a>
+            </div>
+        `;
+
+    }
+
+    function registrar() {
+
+        fetch("/quiz/registrarResultadoQuiz", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                acertosServer: certas,
+                quizServer: numQuiz,
+                idUsuarioServer: sessionStorage.ID_USUARIO
+            })
+        }).then(function (resposta) {
+            
+            if (resposta.ok) {
+                console.log(`${resposta}<br> Registro gravado no banco de dados`);
+            } else {
+                console.log(`${resposta}<br> Algo deu errado, registro não gravado no banco de dados`);
+            }
+
+        }).catch(function (erro) {
+            console.log(`${erro}<br> Algo deu errado (estou no catch)`);
+        })
+        
+    }
+
+    function somarXp() {
+        
+        fetch("/quiz/atualizarXp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                xpServer: qtdXp,
+                idUsuarioServer: sessionStorage.ID_USUARIO
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                console.log(`${resposta}<br> Registro gravado no banco de dados`);
+            } else {
+                console.log(`${resposta}<br> Algo deu errado, registro não gravado no banco de dados`);
+            }
+
+        }).catch(function (erro) {
+            console.log(`${erro}<br> Algo deu errado (estou no catch)`);
+        })
+
+    }
+
+</script>

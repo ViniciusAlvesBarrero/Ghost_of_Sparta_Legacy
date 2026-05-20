@@ -138,21 +138,21 @@
             barraNivel3.style.backgroundImage = "linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0))";
             div_erroSenha.innerHTML = ``;
             senhaValida = false;
-        } else if (forca <= 1) {
+        } else if (forca <= 2) {
             status_forca.innerHTML = `<span style = "color: red;">FRACA</span>`;
             barraNivel1.style.backgroundImage = "linear-gradient(to right, rgb(255, 0, 0), rgb(255, 0, 0), rgba(0, 0, 0, 0))";
             barraNivel2.style.backgroundImage = "linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8))";
             barraNivel3.style.backgroundImage = "linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0))";
             div_erroSenha.innerHTML = `A senha precisa ter no mínimo 8 caracteres e 1 número ou caracter especial`;
             senhaValida = false;
-        } else if (forca <= 2 && tamanhoSenha >= 8) {
+        } else if (forca <= 3 && tamanhoSenha >= 8) {
             status_forca.innerHTML = `<span style = "color: orange;">MÉDIA</span>`;
             barraNivel1.style.backgroundImage = "linear-gradient(to right, rgb(255, 165, 0), rgb(255, 165, 0), rgb(255, 165, 0))";
             barraNivel2.style.backgroundImage = "linear-gradient(to right, rgb(255, 165, 0), rgb(255, 165, 0), rgba(0, 0, 0, 0))";
             barraNivel3.style.backgroundImage = "linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0))";
             div_erroSenha.innerHTML = ``;
             senhaValida = true;
-        } else if (forca <= 4 && tamanhoSenha >= 8) {
+        } else if (forca == 4 && tamanhoSenha >= 8) {
             status_forca.innerHTML = `<span style = "color: green;">FORTE</span>`;
             barraNivel1.style.backgroundImage = "linear-gradient(to right, rgb(0, 128, 0), rgb(0, 128, 0), rgb(0, 128, 0))";
             barraNivel2.style.backgroundImage = "linear-gradient(to right, rgb(0, 128, 0), rgb(0, 128, 0), rgb(0, 128, 0))";
@@ -169,6 +169,7 @@
         let emailVar = email_input.value;
         let senhaVar = senha_input.value;
         let senha2Var = senha2_input.value;
+        let xpVar = 0;
         let tamanhoNome = nomeVar.length;
         let tamanhoEmail = emailVar.length;
 
@@ -206,6 +207,7 @@
                                 nomeServer: nomeVar,
                                 emailServer: emailVar,
                                 senhaServer: senhaVar,
+                                xpServer: xpVar
                             }),
                         }).then(function (resposta) {
                             console.log("resposta: ", resposta);
@@ -225,7 +227,6 @@
                             alert(`${resposta}`);
                         });
 
-                        return false;
                     } else {
 
                         resposta.text().then(texto => {
