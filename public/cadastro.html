@@ -169,7 +169,6 @@
         let emailVar = email_input.value;
         let senhaVar = senha_input.value;
         let senha2Var = senha2_input.value;
-        let xpVar = 0;
         let tamanhoNome = nomeVar.length;
         let tamanhoEmail = emailVar.length;
 
@@ -207,7 +206,6 @@
                                 nomeServer: nomeVar,
                                 emailServer: emailVar,
                                 senhaServer: senhaVar,
-                                xpServer: xpVar
                             }),
                         }).then(function (resposta) {
                             console.log("resposta: ", resposta);

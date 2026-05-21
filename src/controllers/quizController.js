@@ -28,6 +28,7 @@ function atualizarXp(req, res) {
     let totalXp = req.body.xpServer;
     let idUsuario = req.body.idUsuarioServer;
     
+    quizModel.registrarXp(totalXp, idUsuario);
 
     quizModel.atualizarXp(totalXp, idUsuario)
         .then(

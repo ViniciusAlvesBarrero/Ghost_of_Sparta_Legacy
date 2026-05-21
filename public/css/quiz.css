@@ -26,6 +26,18 @@ body {
     background-image: url("../assets/img/background/fundo_quiz2.png");
 }
 
+.fundo-quiz3 {
+    background-image: url("../assets/img/background/fundo_quiz3.png");
+}
+
+.fundo-quiz4 {
+    background-image: url("../assets/img/background/fundo_quiz4.png");
+}
+
+.fundo-quiz5 {
+    background-image: url("../assets/img/background/fundo_quiz5.png");
+}
+
 .back-img {
     position: absolute;
     width: 50px;
