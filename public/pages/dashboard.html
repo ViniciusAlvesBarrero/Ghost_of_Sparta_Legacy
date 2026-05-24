@@ -2,56 +2,90 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/img/icon/flavicon.png" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <link rel="stylesheet" href="../css/pages.css">
-    <script src="../js/sessao.js"></script>
-    <title>God of War Legacy - HUB</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../assets/img/icon/flavicon.png" type="image/png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="stylesheet" href="../css/pages.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <script src="../js/sessao.js"></script>
+  <title>God of War Legacy - HUB</title>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), obterDados()">
+  <div class="header">
+    <img class="logo" src="../assets/img/icon/logo2.png">
 
-    <div class="header">
-        <img class="logo" src="../assets/img/icon/logo2.png">
-
-        <div class="container-btn">
-            <ul>
-                <li class="link-hub"><a href="hub.html"><span class="runa">ᚻ</span><span
-                            class="material-symbols-outlined icon-btn">
-                            explore
-                        </span>HUB</a></li>
-                <li class="link-hub"><a href="hubQuiz.html"><span class="runa">ᚠ</span><span
-                            class="material-symbols-outlined icon-btn">
-                            auto_stories
-                        </span>QUIZ</a></li>
-                <li class="link-hub"><a href="arvore.html"><span class="runa">ᛒ</span><span
-                            class="material-symbols-outlined icon-btn">
-                            family_history
-                        </span>ÁRVORE YGGDRASIL</a></li>
-                <li class="agora"><a href="dashboard.html"><span>ᛋ</span><span
-                            class="material-symbols-outlined icon-btn">
-                            bar_chart_4_bars
-                        </span>DASHBOARD</a></li>
-            </ul>
-        </div>
-        <div class="container-perfil">
-            <div class="icon-usuario">
-                <img class="img-usuario" src="../assets/img/icon/usuarioDefault.png">
-            </div>
-            <p id="divNomeUsuario">Kratos</p>
-            <hr class="divisoria">
-            <button class="btn-logout" onclick="limparSessao()"><span
-                    class="material-symbols-outlined">logout</span>Sair</button>
-        </div>
+    <div class="container-btn">
+      <ul>
+        <li class="link-hub"><a href="hub.html"><span class="runa">ᚻ</span><span
+              class="material-symbols-outlined icon-btn">
+              explore
+            </span>HUB</a></li>
+        <li class="link-hub"><a href="hubQuiz.html"><span class="runa">ᚠ</span><span
+              class="material-symbols-outlined icon-btn">
+              auto_stories
+            </span>QUIZ</a></li>
+        <li class="link-hub"><a href="arvore.html"><span class="runa">ᛒ</span><span
+              class="material-symbols-outlined icon-btn">
+              family_history
+            </span>ÁRVORE YGGDRASIL</a></li>
+        <li class="agora"><a href="dashboard.html"><span>ᛋ</span><span class="material-symbols-outlined icon-btn">
+              bar_chart_4_bars
+            </span>DASHBOARD</a></li>
+      </ul>
     </div>
-
-    <div class="container">
-        <div>
-            <canvas id="myChart"></canvas>
-        </div>
+    <div class="container-perfil">
+      <div class="icon-usuario">
+        <img class="img-usuario" src="../assets/img/icon/usuarioDefault.png">
+      </div>
+      <p id="divNomeUsuario">Usuário</p>
+      <hr class="divisoria">
+      <button class="btn-logout" onclick="limparSessao()"><span
+          class="material-symbols-outlined">logout</span>Sair</button>
     </div>
+  </div>
+
+  <div class="container">
+    <div class="container-kpi">
+      <div class="kpi">
+        <h3>Meta de XP diária <img class="icon-kpi" src="../assets/img/icon/iconXp.png"></h3>
+        <h4><span id="metaXp">980</span>XP / <span id="xpRealidade">1000</span>XP</h4>
+        <p><span id="porcentagemXpRealidade">98</span>% (Mínimo esperado: <span id="porcentagemXpEsperado">75</span>%)
+        </p>
+      </div>
+      <div class="kpi">
+        <h3>Atributo em evidência<img class="icon-kpi" src="../assets/img/icon/logoDourado.png"></h3>
+        <h4><span id="pontosAtributo">XX</span> pontos</h4>
+        <p><span id="AtributoEvidencia">Atributo</p>
+      </div>
+      <div class="kpi">
+        <h3>Quiz com mais acertos<img class="icon-kpi" src="../assets/img/icon/iconQuiz.png"></h3>
+        <h4><span id="qtdAcertos">X</span> / 5 acertos</h4>
+        <p><span id="nomeQuiz"></span></p>
+      </div>
+      <div class="kpi">
+        <h3>Meta de abates por batalha<img class="icon-kpi" src="../assets/img/icon/iconAbates.png"></h3>
+        <h4><span id="qtdDerrotados">9</span> / <span id="metaDerrotados">15</span> inimigos derrotados</h4>
+        <p><span id="porcentagemAbatesRealidade">60</span>% (Mínimo esperado: <span
+            id="porcentagemAbatesEsperado">66,67</span>%)</p>
+      </div>
+    </div>
+    <div class="container-graficos">
+      <div class="grafico">
+        <canvas id="graficoXpDia"></canvas>
+      </div>
+      <div class="grafico">
+        <canvas id="graficoAcertosQuiz"></canvas>
+      </div>
+      <div class="grafico">
+        <canvas id="graficoQtdDerrotados"></canvas>
+      </div>
+      <div class="grafico">
+        <canvas id="graficoAtributos"></canvas>
+      </div>
+    </div>
+  </div>
 
 </body>
 
@@ -60,10 +94,150 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  const ctx = document.getElementById('myChart');
 
-  new Chart(ctx, {
-    type: 'bar',
+  function obterDados() {
+
+    let idUsuario = sessionStorage.ID_USUARIO;
+
+    fetch(`/obterDados/buscarDadosXp/${idUsuario}`, {
+      method: "GET",
+      cache: "no-store"
+    })
+      .then(function (resultadoBuscaXp) {
+        return resultadoBuscaXp.json();
+      })
+      .then(function (dadosXp) {
+        plotarGraficoXpDia(dadosXp);
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+
+    fetch(`/obterDados/buscarDadosQuiz/${idUsuario}`, {
+      method: "GET",
+      cache: "no-store"
+    })
+      .then(function (resultadoBuscaQuiz) {
+        return resultadoBuscaQuiz.json();
+      })
+      .then(function (dadosQuiz) {
+        plotarGraficoAcertosQuiz(dadosQuiz);
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+
+    fetch(`/obterDados/BuscarDadosAtributos/${idUsuario}`, {
+      method: "GET",
+      cache: "no-store"
+    })
+      .then(function (resultadoBuscaAtributos) {
+        return resultadoBuscaAtributos.json();
+      })
+      .then(function (dadosAtributos) {
+        plotarGraficoAtributos(dadosAtributos);
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+
+  }
+
+  function plotarGraficoXpDia(dadosXp) {
+
+    var qtdXp = [0, 0, 0, 0, 0, 0, 0];
+    var dia = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]
+
+    // Preenchendo os arrays com os dados
+    for (var i = 0; i < dadosXp.length; i++) {
+      for (var j = 0; j < dia.length; j++) {
+        if (dia[j] == dadosXp[i].dia) {
+          qtdXp[j] = dadosXp[i].qtdXp;
+        }
+      }
+    }
+
+    const ctx1 = document.getElementById('graficoXpDia');
+
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: dia,
+        datasets: [{
+          label: 'Quantidade de XP por dia',
+          data: qtdXp,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Quantidade de Xp adquirido na semana'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  function plotarGraficoAcertosQuiz(dadosQuiz) {
+
+    var acertos = [];
+    var quiz = [];
+    var maisAcertos = 0;
+    var nomeMaisAcertos = `Nenhum Quiz foi feito`;
+
+    // Preenchendo os arrays com os dados
+    for (var i = 0; i < dadosQuiz.length; i++) {
+      acertos.push(dadosQuiz[i].acertos);
+      quiz.push(dadosQuiz[i].quiz);
+      if (maisAcertos <= JSON.parse(dadosQuiz[i].acertos)) {
+        maisAcertos = JSON.parse(dadosQuiz[i].acertos);
+        nomeMaisAcertos = `Quiz - ${dadosQuiz[i].quiz}`;
+      }
+    }
+
+    qtdAcertos.innerHTML = maisAcertos;
+    nomeQuiz.innerHTML = nomeMaisAcertos
+
+    const ctx2 = document.getElementById('graficoAcertosQuiz');
+
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: quiz,
+        datasets: [{
+          label: 'Maior número de acertos de cada Quiz',
+          data: acertos,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Máximo de acertos de cada quiz'
+          }
+        },
+        indexAxis: 'y',
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  const ctx3 = document.getElementById('graficoQtdDerrotados');
+
+  new Chart(ctx3, {
+    type: 'line',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{
@@ -73,6 +247,12 @@
       }]
     },
     options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Quantidade de inimigos derrotados nas últimas 5 tentativas'
+        }
+      },
       scales: {
         y: {
           beginAtZero: true
@@ -80,4 +260,60 @@
       }
     }
   });
+
+  function plotarGraficoAtributos(dadosAtributos) {
+
+    let falta = (400 - (JSON.parse(dadosAtributos[0].statusForca) +
+      JSON.parse(dadosAtributos[0].statusVelocidade) +
+      JSON.parse(dadosAtributos[0].statusVitalidade) +
+      JSON.parse(dadosAtributos[0].statusDefesa)));
+    var nomeAtributo = ["Força", "Velocidade", "Vitalidade", "Defesa", "pontos disponiveis"];
+    var status = [
+      dadosAtributos[0].statusForca,
+      dadosAtributos[0].statusVelocidade,
+      dadosAtributos[0].statusVitalidade,
+      dadosAtributos[0].statusDefesa,
+      falta
+    ];
+
+    var pontosEvidencia = 0;
+    var nomeAtributoKpi = ``
+
+    for (let i = 0; i < status.length; i++) {
+      if (JSON.parse(status[i]) > pontosEvidencia && JSON.parse(status[i]) < 100) {
+        pontosEvidencia = JSON.parse(status[i]);
+        nomeAtributoKpi = nomeAtributo[i];
+      }
+    }
+
+    pontosAtributo.innerHTML = pontosEvidencia;
+    AtributoEvidencia.innerHTML = nomeAtributoKpi;
+
+    const ctx4 = document.getElementById('graficoAtributos');
+
+    new Chart(ctx4, {
+      type: 'pie',
+      data: {
+        labels: nomeAtributo,
+        datasets: [{
+          data: status,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Distribuição dos Pontos de Atributos em relação ao total possível'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
 </script>

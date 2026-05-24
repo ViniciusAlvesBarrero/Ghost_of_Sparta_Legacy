@@ -95,7 +95,7 @@ body {
     transition: 3.5s;
 }
 
-.container:has(.cadastro-form .btn-cadastrar:hover) .kratos {
+.container:has(.cadastro-form .btn-cadastrar:focus) .kratos {
     right: -300px;
 }
 

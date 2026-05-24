@@ -131,8 +131,8 @@ function definirPerguntas(quiz) {
 
             {
                 pergunta: "Qual é o nome dos punhos em formato de leão que Kratos rouba de Hércules?",
-                alternativaA: "Garras de Ares",
-                alternativaB: "Cestos de Nemeia",
+                alternativaA: "Garras de Hades",
+                alternativaB: "Fúria de Bóreas",
                 alternativaC: "Chicote de Nemesis",
                 alternativaD: "Cestos de Nemeia",
                 alternativaCorreta: "alternativaD"
@@ -194,8 +194,8 @@ function definirPerguntas(quiz) {
             {
                 pergunta: "Quem é o primeiro deus nórdico enfrentado por Kratos?",
                 alternativaA: "Thor",
-                alternativaB: "Tyr",
-                alternativaC: "Heimdall",
+                alternativaB: "Magni",
+                alternativaC: "Modi",
                 alternativaD: "Baldur",
                 alternativaCorreta: "alternativaD"
             },
@@ -247,7 +247,7 @@ function definirPerguntas(quiz) {
             {
                 pergunta: "Quem mata Brok durante os acontecimentos do jogo?",
                 alternativaA: "Thor",
-                alternativaB: "Heimdall",
+                alternativaB: "Týr",
                 alternativaC: "Odin",
                 alternativaD: "Freyr",
                 alternativaCorreta: "alternativaC"
@@ -438,11 +438,11 @@ function gerarXp(botao) {
         }
     } else if (porcentagemFinalDeAcertos >= 0.7) {
         if (idBotao == "bau1") {
-            qtdXp = (numAleatorio1 * 4) + 100;
+            qtdXp = (numAleatorio1 * 5) + 100;
         } else if (idBotao == "bau2") {
-            qtdXp = (numAleatorio2 * 4) + 100;
+            qtdXp = (numAleatorio2 * 5) + 100;
         } else if (idBotao == "bau3") {
-            qtdXp = (numAleatorio3 * 4) + 100;
+            qtdXp = (numAleatorio3 * 5) + 100;
         }
     }
 

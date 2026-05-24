@@ -19,7 +19,10 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        usuarioModel.criarAvatar(email, senha);
+                        let idUsuario = resultadoAutenticar[0].idUsuario;
+
+                        usuarioModel.criarAvatar(idUsuario);
+                        usuarioModel.criarSet(idUsuario);
 
                         res.json({
                             id: resultadoAutenticar[0].idUsuario,
