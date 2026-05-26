@@ -13,7 +13,8 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var quizRouter = require("./src/routes/quiz");
-var obterDadosRouter = require("./src/routes/obterDados")
+var obterDadosRouter = require("./src/routes/obterDados");
+var metasRouter = require("./src/routes/metas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +26,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/quiz", quizRouter);
 app.use("/obterDados", obterDadosRouter);
+app.use("/metas", metasRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

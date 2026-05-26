@@ -74,44 +74,45 @@
                     emailServer: emailVar,
                     senhaServer: senhaVar
                 })
-            }).then(function (resposta) {
-                console.log("ESTOU NO THEN DO entrar()!")
+            })
+                .then(function (resposta) {
+                    console.log("ESTOU NO THEN DO entrar()!")
 
-                if (resposta.ok) {
-                    console.log(resposta);
+                    if (resposta.ok) {
+                        console.log(resposta);
 
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-                        sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.ID_USUARIO = json.id;
+                        resposta.json().then(json => {
+                            console.log(json);
+                            console.log(JSON.stringify(json));
+                            sessionStorage.EMAIL_USUARIO = json.email;
+                            sessionStorage.NOME_USUARIO = json.nome;
+                            sessionStorage.ID_USUARIO = json.id;
 
-                        setTimeout(function () {
-                            window.location = "pages/hub.html";
-                        }, 500); // apenas para exibir o loading
+                            setTimeout(function () {
+                                window.location = "pages/hub.html";
+                            }, 500); // apenas para exibir o loading
 
-                    });
+                        });
 
-                } else {
+                    } else {
 
-                    console.log("Houve um erro ao tentar realizar o login!");
+                        console.log("Houve um erro ao tentar realizar o login!");
 
-                    resposta.text().then(texto => {
-                        console.error(texto);
-                        divExibirErro.innerHTML = texto;
-                    });
+                        resposta.text().then(texto => {
+                            console.error(texto);
+                            divExibirErro.innerHTML = texto;
+                        });
+                        popUpLoginErro.style.display = "flex";
+                        idDivLogin.style.filter = "brightness(0.4)";
+
+                    }
+
+                }).catch(function (erro) {
+                    console.log(erro);
+                    divExibirErro.innerHTML = erro;
                     popUpLoginErro.style.display = "flex";
                     idDivLogin.style.filter = "brightness(0.4)";
-
-                }
-
-            }).catch(function (erro) {
-                console.log(erro);
-                divExibirErro.innerHTML = erro;
-                popUpLoginErro.style.display = "flex";
-                idDivLogin.style.filter = "brightness(0.4)";
-            })
+                })
 
         }
     }

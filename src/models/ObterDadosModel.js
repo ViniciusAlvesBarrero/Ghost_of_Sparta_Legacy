@@ -26,10 +26,6 @@ function buscarDadosXp(idUsuario) {
 }
 
 function buscarDadosQuiz(idUsuario) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", idUsuario);
-
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
     var instrucaoSql = `
         SELECT 
         MAX(qtdAcertos) AS acertos, CONCAT("God of War ", 
@@ -47,10 +43,6 @@ function buscarDadosQuiz(idUsuario) {
 }
 
 function buscarDadosAtributos(idUsuario) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", idUsuario);
-
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
     var instrucaoSql = `
         SELECT 
             ROUND(a.forca * (1 + SUM(e.bonusForca)), 0) AS statusForca, 
@@ -67,8 +59,18 @@ function buscarDadosAtributos(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarMeta(idUsuario) {
+    var instrucaoSql = `
+        SELECT metaXp AS metaDiaria FROM usuario
+            WHERE ${idUsuario};
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarDadosXp,
     buscarDadosQuiz,
-    buscarDadosAtributos
+    buscarDadosAtributos,
+    buscarMeta
 };
