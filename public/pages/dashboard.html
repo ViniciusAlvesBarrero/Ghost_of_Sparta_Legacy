@@ -50,8 +50,8 @@
     <div class="container-kpi">
       <div class="kpi">
         <h3>Meta de XP diária <img class="icon-kpi" src="../assets/img/icon/iconXp.png"></h3>
-        <h4><span id="metaRealidade">980</span>XP / <span id="metaXp">0</span>XP</h4>
-        <p><span id="porcentagemXpRealidade">98</span>% (Mínimo esperado: <span id="porcentagemXpEsperado">75</span>%)
+        <h4><span id="metaRealidade">XX</span>XP / <span id="metaXp">0</span>XP</h4>
+        <p>Você atingiu <span id="porcentagemMetaXp">XX</span>% da meta</p>
         </p>
         <div class="container-btn-meta">
           <button onclick="definirMeta()">Definir</button>
@@ -60,19 +60,19 @@
       </div>
       <div class="kpi">
         <h3>Atributo em evidência<img class="icon-kpi" src="../assets/img/icon/logoDourado.png"></h3>
-        <h4><span id="pontosAtributo">XX</span> pontos</h4>
-        <p><span id="AtributoEvidencia">Atributo</p>
+        <h4><span id="AtributoEvidencia">Atributo</h4>
+        <p><span id="pontosAtributo">XX</span> pontos</p>
       </div>
       <div class="kpi">
         <h3>Quiz com mais acertos<img class="icon-kpi" src="../assets/img/icon/iconQuiz.png"></h3>
-        <h4><span id="qtdAcertos">X</span> / 5 acertos</h4>
-        <p><span id="nomeQuiz"></span></p>
+        <h4><span id="nomeQuiz"></span></h4>
+        <p><span id="qtdAcertos">X</span> / 5 acertos</p>
       </div>
       <div class="kpi">
         <h3>Meta de abates por batalha<img class="icon-kpi" src="../assets/img/icon/iconAbates.png"></h3>
-        <h4><span id="qtdDerrotados">9</span> / <span id="metaDerrotados">15</span> inimigos derrotados</h4>
         <p><span id="porcentagemAbatesRealidade">60</span>% (Mínimo esperado: <span
             id="porcentagemAbatesEsperado">66,67</span>%)</p>
+        <h4><span id="qtdDerrotados">9</span> / <span id="metaDerrotados">15</span> inimigos derrotados</h4>
       </div>
     </div>
     <div class="container-graficos">
@@ -100,6 +100,8 @@
 <script>
 
   let idUsuario = sessionStorage.ID_USUARIO;
+  let xpAtual;
+  let totalMeta = 0;
 
   function obterDados() {
 
@@ -145,16 +147,27 @@
         console.log(err);
       })
 
-
     fetch(`/obterDados/buscarDadosMeta/${idUsuario}`, {
       method: "GET",
-      // cache: "no-store"
     })
       .then(function (resultadoBuscaMeta) {
         return resultadoBuscaMeta.json();
       })
       .then(function (dadosMeta) {
         plotarMeta(dadosMeta)
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+
+    fetch(`/obterDados/buscarDadosXpDiario/${idUsuario}`, {
+      method: "GET",
+    })
+      .then(function (resultadoXpDiario) {
+        return resultadoXpDiario.json();
+      })
+      .then(function (dadosXpDiario) {
+        plotarXpDiario(dadosXpDiario)
       })
       .catch(function (err) {
         console.log(err);
@@ -178,8 +191,10 @@
       if (resposta.ok) {
         console.log(`${resposta}<br> Registro gravado no banco de dados`);
         metaXp.innerHTML = meta;
+        totalMeta = meta;
+        atualizarPorcentagem();
       } else {
-        console.log(`${resposta}<br> Algo deu errado, registro não gravado no banco de dados`);
+        alert("Digite apenas números para a meta");
       }
     }).catch(function (erro) {
       console.log(`${erro}<br> Algo deu errado (estou no catch)`);
@@ -188,6 +203,24 @@
 
   function plotarMeta(dadosMeta) {
     metaXp.innerHTML = dadosMeta[0].metaDiaria;
+    totalMeta = dadosMeta[0].metaDiaria;
+  }
+
+  function plotarXpDiario(dadosXpDiario) {
+    if (dadosXpDiario == 0) {
+      metaRealidade.innerHTML = dadosXpDiario;
+      xpAtual = dadosXpDiario
+    } else {
+      metaRealidade.innerHTML = dadosXpDiario[0].totalXp;
+      xpAtual = dadosXpDiario[0].totalXp;
+      atualizarPorcentagem();
+    }
+  }
+
+  function atualizarPorcentagem() {
+    if (xpAtual !== undefined && totalMeta > 0) {
+      porcentagemMetaXp.innerHTML = ((xpAtual / totalMeta) * 100).toFixed(1);
+    }
   }
 
   function plotarGraficoXpDia(dadosXp) {
@@ -195,7 +228,6 @@
     var qtdXp = [0, 0, 0, 0, 0, 0, 0];
     var dia = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
 
-    // Preenchendo os arrays com os dados
     for (var i = 0; i < dadosXp.length; i++) {
       for (var j = 0; j < dia.length; j++) {
         if (dia[j] == dadosXp[i].dia) {
@@ -213,19 +245,46 @@
         datasets: [{
           label: 'Quantidade de XP por dia',
           data: qtdXp,
-          borderWidth: 1
+          backgroundColor: 'rgba(139, 26, 26, 0.85)',
+          borderColor: 'rgb(201, 146, 42)',
+          borderWidth: 1.5,
+          hoverBackgroundColor: 'rgba(180, 40, 40, 0.95)',
+          hoverBorderColor: 'rgb(240, 192, 64)',
+          hoverBorderWidth: 2,
+          borderRadius: 3,
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
-            text: 'Quantidade de Xp adquirido na semana'
+            text: 'Quantidade de XP adquirido na semana',
+            color: 'rgb(201, 146, 42)',
+            font: { family: 'Georgia, serif', size: 18, weight: 'bold' },
+            padding: { bottom: 16 }
+          },
+          tooltip: {
+            backgroundColor: 'rgb(26, 18, 8)',
+            titleColor: 'rgb(201, 146, 42)',
+            bodyColor: 'rgb(232, 213, 163)',
+            borderColor: 'rgb(122, 92, 30)',
+            borderWidth: 1,
+            callbacks: {
+              label: (ctx) => ` ${ctx.parsed.y} XP`
+            }
           }
         },
         scales: {
+          x: {
+            ticks: { color: 'rgb(201, 146, 42)', font: { family: 'Georgia, serif', weight: 'bold' } }
+          },
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            grid: { color: 'rgba(122, 92, 30, 0.15)' },
+            border: { color: 'rgb(122, 92, 30)', dash: [4, 4] },
+            ticks: { color: 'rgb(201, 146, 42)', callback: (v) => v + ' XP' }
           }
         }
       }
@@ -239,7 +298,6 @@
     var maisAcertos = 0;
     var nomeMaisAcertos = `Nenhum Quiz foi feito`;
 
-    // Preenchendo os arrays com os dados
     for (var i = 0; i < dadosQuiz.length; i++) {
       acertos.push(dadosQuiz[i].acertos);
       quiz.push(dadosQuiz[i].quiz);
@@ -261,20 +319,47 @@
         datasets: [{
           label: 'Maior número de acertos de cada Quiz',
           data: acertos,
-          borderWidth: 1
+          backgroundColor: 'rgba(139, 26, 26, 0.85)',
+          borderColor: 'rgb(201, 146, 42)',
+          borderWidth: 1.5,
+          hoverBackgroundColor: 'rgba(180, 40, 40, 0.95)',
+          hoverBorderColor: 'rgb(240, 192, 64)',
+          hoverBorderWidth: 2,
+          borderRadius: 3,
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
-            text: 'Máximo de acertos de cada quiz'
+            text: 'Máximo de acertos de cada quiz',
+            color: 'rgb(201, 146, 42)',
+            font: { family: 'Georgia, serif', size: 18, weight: 'bold' },
+            padding: { bottom: 16 }
+          },
+          tooltip: {
+            backgroundColor: 'rgb(26, 18, 8)',
+            titleColor: 'rgb(201, 146, 42)',
+            bodyColor: 'rgb(232, 213, 163)',
+            borderColor: 'rgb(122, 92, 30)',
+            borderWidth: 1,
+            callbacks: {
+              label: (ctx) => `Acertos: ${ctx.parsed.x}`
+            }
           }
         },
         indexAxis: 'y',
         scales: {
+          x: {
+            grid: { color: 'rgba(122, 92, 30, 0.15)' },
+            border: { color: 'rgb(122, 92, 30)', dash: [4, 4] },
+            ticks: { color: 'rgb(201, 146, 42)', font: { family: 'Georgia, serif', weight: 'bold' }, stepSize: 1 }
+          },
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks: { color: 'rgb(201, 146, 42)' }
           }
         }
       }
@@ -286,23 +371,52 @@
   new Chart(ctx3, {
     type: 'line',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: ['Tentativa 1', 'Tentativa 2', 'Tentativa 3', 'Tentativa 4', 'Tentativa 5'],
       datasets: [{
-        label: '# of Votes',
+        label: 'Quantidade de inimigos derrotados',
         data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
+        backgroundColor: 'rgba(139, 26, 26, 0.85)',
+        borderColor: 'rgb(201, 146, 42)',
+        borderWidth: 1.5,
+        hoverBackgroundColor: 'rgba(180, 40, 40, 0.95)',
+        hoverBorderColor: 'rgb(240, 192, 64)',
+        hoverBorderWidth: 2,
+        borderRadius: 3,
       }]
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         title: {
           display: true,
-          text: 'Quantidade de inimigos derrotados nas últimas 5 tentativas'
+          text: 'Quantidade de inimigos derrotados nas últimas 5 tentativas',
+          color: 'rgb(201, 146, 42)',
+          font: { family: 'Georgia, serif', size: 18, weight: 'bold' },
+          padding: { bottom: 16 }
+        },
+        tooltip: {
+          backgroundColor: 'rgb(26, 18, 8)',
+          titleColor: 'rgb(201, 146, 42)',
+          bodyColor: 'rgb(232, 213, 163)',
+          borderColor: 'rgb(122, 92, 30)',
+          borderWidth: 1,
+          callbacks: {
+            label: (ctx) => ` ${ctx.parsed.y} inimigos`
+          }
         }
       },
       scales: {
+        x: {
+          grid: { color: 'rgba(122, 92, 30, 0.15)' },
+          border: { color: 'rgb(122, 92, 30)' },
+          ticks: { color: 'rgb(201, 146, 42)', font: { family: 'Georgia, serif', weight: 'bold' } }
+        },
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          grid: { color: 'rgba(122, 92, 30, 0.15)' },
+          border: { color: 'rgb(122, 92, 30)', dash: [4, 4] },
+          ticks: { color: 'rgb(201, 146, 42)' }
         }
       }
     }
@@ -344,19 +458,46 @@
         labels: nomeAtributo,
         datasets: [{
           data: status,
-          borderWidth: 1
+          backgroundColor: [
+            'rgba(228, 46, 0, 0.85)',
+            'rgba(201, 146, 42, 0.85)',
+            'rgba(139, 26, 26, 0.85)',
+            'rgba(15, 15, 15, 0.85)',
+            'rgba(180, 175, 170, 0.85)'
+          ],
+          borderColor: [
+            'rgb(170, 30, 0)',
+            'rgb(240, 192, 64)',
+            'rgb(200, 50, 50)',
+            'rgb(60, 60, 60)',
+            'rgb(210, 205, 200)'
+          ],
+          borderWidth: 1.5,
+          hoverBackgroundColor: 'rgba(20, 40, 80, 0.4)',
+          hoverBorderColor: 'rgb(240, 192, 64)',
+          hoverBorderWidth: 2,
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
-            text: 'Distribuição dos Pontos de Atributos em relação ao total possível'
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true
+            text: 'Distribuição dos Pontos de Atributos em relação ao total possível',
+            color: 'rgb(201, 146, 42)',
+            font: { family: 'Georgia, serif', size: 18, weight: 'bold' },
+            padding: { bottom: 16 }
+          },
+          tooltip: {
+            backgroundColor: 'rgb(26, 18, 8)',
+            titleColor: 'rgb(201, 146, 42)',
+            bodyColor: 'rgb(232, 213, 163)',
+            borderColor: 'rgb(122, 92, 30)',
+            borderWidth: 1,
+            callbacks: {
+              label: (ctx) => ` ${ctx.parsed} pontos`
+            }
           }
         }
       }

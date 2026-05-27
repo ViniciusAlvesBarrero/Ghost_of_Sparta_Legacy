@@ -251,6 +251,10 @@ body {
     height: 70vh;
     border-radius: 10px;
     border: solid 1px rgb(33, 72, 110, 0.4);
+    background-image: url("../assets/img/background/fundo_recompensa.png");
+    background-position: center -250px;
+    background-size: 130%;
+    background-repeat: no-repeat;
     background-color: rgb(14, 16, 26);
     overflow: hidden;
     z-index: 1;
@@ -293,6 +297,7 @@ body {
 
 .btn-recompensa {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0);
@@ -348,4 +353,42 @@ body {
     width: 630px;
     transform: rotate(45deg);
     opacity: 0.15;
+}
+
+.brilho1{
+position: absolute;
+box-shadow: 0 0 60px 150px rgba(249, 173, 38, 0.6);
+top: 250px;
+opacity: 0;
+transition: 1s;
+}
+
+.brilho2{
+position: absolute;
+box-shadow: 0 0 60px 150px rgba(249, 173, 38, 0.6);
+top: 250px;
+left: 160px;
+opacity: 0;
+transition: 1s;
+}
+
+.brilho3{
+position: absolute;
+box-shadow: 0 0 60px 150px rgba(249, 173, 38, 0.6);
+top: 250px;
+right: 180px;
+opacity: 0;
+transition: 1s;
+}
+
+.container-mensagem-final:has(.bau-1:hover) .brilho1 {
+    opacity: 0.4;
+}
+
+.container-mensagem-final:has(.bau-2:hover) .brilho2 {
+    opacity: 0.4;
+}
+
+.container-mensagem-final:has(.bau-3:hover) .brilho3 {
+    opacity: 0.4;
 }

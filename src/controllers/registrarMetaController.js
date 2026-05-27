@@ -7,25 +7,31 @@ function registrarMeta(req, res) {
 
     // Faça as validações dos valores
     if (meta == undefined) {
-        res.status(400).send("Sua meta está undefined!");
+        res.status(400).send("Sua meta está indefinida!");
     } else {
 
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        definirMetaModel.registrarMeta(meta, idUsuario)
-            .then(
-                function (resultadoMeta) {
-                    res.json(resultadoMeta);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
+        if (isNaN(meta)) {
+            res.status(400).send("Digite somente números");
+        } else if (meta.includes(".")) {
+            res.status(400).send("Digite apenas números inteiros")
+        } else {
+            definirMetaModel.registrarMeta(meta, idUsuario)
+                .then(
+                    function (resultadoMeta) {
+                        res.json(resultadoMeta);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+
     }
 }
 

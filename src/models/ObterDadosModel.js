@@ -62,7 +62,27 @@ function buscarDadosAtributos(idUsuario) {
 function buscarMeta(idUsuario) {
     var instrucaoSql = `
         SELECT metaXp AS metaDiaria FROM usuario
-            WHERE ${idUsuario};
+            WHERE idUsuario = ${idUsuario};
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarXpDiario(idUsuario) {
+    var instrucaoSql = `
+        SELECT SUM(xp) AS totalXp, 
+	        CASE DAYNAME(dtXpAdquirido)
+                WHEN 'Sunday' THEN 'Domingo'
+                WHEN 'Monday' THEN 'Segunda-feira'
+                WHEN 'Tuesday' THEN 'Terça-feira'
+                WHEN 'Wednesday' THEN 'Quarta-feira'
+                WHEN 'Thursday' THEN 'Quinta-feira'
+                WHEN 'Friday' THEN 'Sexta-feira'
+                WHEN 'Saturday' THEN 'Sábado'
+            END AS dia 
+        FROM experiencia
+	        WHERE DATEDIFF(CURDATE(), dtXPAdquirido) = 0 AND fkUsuario = ${idUsuario}
+            GROUP BY fkUsuario, dtXPAdquirido;
         `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -72,5 +92,6 @@ module.exports = {
     buscarDadosXp,
     buscarDadosQuiz,
     buscarDadosAtributos,
-    buscarMeta
+    buscarMeta, 
+    buscarXpDiario
 };

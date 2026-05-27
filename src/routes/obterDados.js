@@ -19,4 +19,8 @@ router.get("/buscarDadosMeta/:idUsuario", function (req, res) {
     ObterDadosGraficos.buscarMeta(req, res);
 });
 
+router.get("/buscarDadosXpDiario/:idUsuario", function (req, res) {
+    ObterDadosGraficos.buscarXpDiario(req, res);
+});
+
 module.exports = router;

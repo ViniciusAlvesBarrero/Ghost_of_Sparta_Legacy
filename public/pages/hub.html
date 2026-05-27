@@ -12,7 +12,7 @@
     <title>God of War Legacy - HUB</title>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), buscarAtributos()">
 
     <div class="header">
         <img class="logo" src="../assets/img/icon/logo2.png">
@@ -64,7 +64,7 @@
         <div class="painel">
             <div class="progresso-yggdrasil">
                 <a href="arvore.html">
-                    <h1>Yggdrasil a Árvore do Mundo <span>Guia de habilidades</span></h1>
+                    <h1>Yggdrasil a Árvore do Mundo <span>Guia de equipamentos</span></h1>
                     <img src="../assets/img/cards/yggdrasil_simbolo.png" class="yggdrasil-simbolo">
                     <img src="../assets/img/cards/yggdrasil_circulo.png" class="yggdrasil-circulo">
                     <div class="container-progresso">
@@ -87,40 +87,40 @@
                         <div class="container-barra-atributo">
                             <p>Vitalidade</p>
                             <div class="barra">
-                                <div class="progresso-barra"></div>
+                                <div class="progresso-barra" id="barraVitalidade"></div>
                             </div>
                         </div>
-                        <p class="num-progresso">100</p>
+                        <p class="num-progresso" id="numProgressoVitalidade">100</p>
                     </div>
                     <div class="status">
                         <img src="../assets/img/icon/iconForca.png" class="icon-atributo">
                         <div class="container-barra-atributo">
                             <p>Força</p>
                             <div class="barra">
-                                <div class="progresso-barra"></div>
+                                <div class="progresso-barra" id="barraForca"></div>
                             </div>
                         </div>
-                        <p class="num-progresso">100</p>
+                        <p class="num-progresso" id="numProgressoForca">XX</p>
                     </div>
                     <div class="status">
                         <img src="../assets/img/icon/iconDefesa.png" class="icon-atributo">
                         <div class="container-barra-atributo">
                             <p>Defesa</p>
                             <div class="barra">
-                                <div class="progresso-barra"></div>
+                                <div class="progresso-barra" id="barraDefesa"></div>
                             </div>
                         </div>
-                        <p class="num-progresso">100</p>
+                        <p class="num-progresso" id="numProgressoDefesa">XX</p>
                     </div>
                     <div class="status">
                         <img src="../assets/img/icon/iconVelocidade.png" class="icon-atributo">
                         <div class="container-barra-atributo">
                             <p>Velocidade</p>
                             <div class="barra">
-                                <div class="progresso-barra"></div>
+                                <div class="progresso-barra" id="barraVelocidade"></div>
                             </div>
                         </div>
-                        <p class="num-progresso">100</p>
+                        <p class="num-progresso" id="numProgressoVelocidade">XX</p>
                     </div>
                     <a href="arsenal.html"><button class="teste">Ir para o Arsenal</button></a>
                 </div>
@@ -131,3 +131,36 @@
 </body>
 
 </html>
+
+<script>
+
+    function buscarAtributos() {
+
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/obterDados/BuscarDadosAtributos/${idUsuario}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaAtributos) {
+                return resultadoBuscaAtributos.json();
+            })
+            .then(function (dadosAtributos) {
+                barraForca.style.width = `${dadosAtributos[0].statusForca}%`;
+                numProgressoForca.innerHTML = dadosAtributos[0].statusForca;
+                
+                barraVitalidade.style.width = `${dadosAtributos[0].statusVitalidade}%`;
+                numProgressoVitalidade.innerHTML = dadosAtributos[0].statusVitalidade;
+                
+                barraDefesa.style.width = `${dadosAtributos[0].statusDefesa}%`;
+                numProgressoDefesa.innerHTML = dadosAtributos[0].statusDefesa;
+                
+                barraVelocidade.style.width = `${dadosAtributos[0].statusVelocidade}%`;
+                numProgressoVelocidade.innerHTML = dadosAtributos[0].statusVelocidade;
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+
+    }
+
+</script>

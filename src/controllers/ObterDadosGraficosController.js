@@ -84,9 +84,36 @@ function buscarMeta(req, res) {
         );
 }
 
+function buscarXpDiario(req, res) {
+
+    let idUsuario = req.params.idUsuario;
+
+    obterDadosModel.buscarXpDiario(idUsuario)
+        .then(
+            function (resultadoBuscaXpDiario) {
+
+                if (resultadoBuscaXpDiario.length >= 1) {
+                    res.json(resultadoBuscaXpDiario);
+                } else {
+                    res.json(0);
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar dados! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     buscarDadosXp,
     buscarDadosQuiz,
     buscarDadosAtributos,
-    buscarMeta
+    buscarMeta,
+    buscarXpDiario
 }

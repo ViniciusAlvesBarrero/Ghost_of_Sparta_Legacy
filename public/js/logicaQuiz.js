@@ -394,7 +394,8 @@ function finalizarJogo() {
     }
 
     if (certas == 0) {
-        containerMensagem.style.display = "flex"
+        containerMensagem.style.display = "flex";
+        containerMensagem.style.backgroundImage = "none";
         containerMensagem.innerHTML = `
             <img src="../assets/img/icon/flavicon.png" class="fundo-logo">
             <h1 class="mensagem-concluido">Quiz concluído!</h1>
@@ -448,6 +449,8 @@ function gerarXp(botao) {
 
     registrar();
     somarXp();
+
+    containerMensagem.style.backgroundImage = "none";
 
     containerMensagem.innerHTML = `
             <img src="../assets/img/icon/flavicon.png" class="fundo-logo">
