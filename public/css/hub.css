@@ -22,13 +22,15 @@
 }
 
 .kratos-avatar,
-.armadura {
+.armadura, 
+.manopla{
     position: absolute;
     height: 100%;
     cursor: pointer;
     transition: 1s;
     pointer-events: none;
     user-select: none;
+
 }
 
 .logo-background {
@@ -67,6 +69,10 @@
 }
 
 .container-avatar:hover .armadura {
+    height: 102%;
+}
+
+.container-avatar:hover .manopla {
     height: 102%;
 }
 

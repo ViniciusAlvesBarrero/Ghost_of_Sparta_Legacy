@@ -21,15 +21,18 @@ function autenticar(req, res) {
 
                         let idUsuario = resultadoAutenticar[0].idUsuario;
 
-                        usuarioModel.criarAvatar(idUsuario);
+                        usuarioModel.criarAvatar(idUsuario)
                         usuarioModel.criarSet(idUsuario);
+                        usuarioModel.criarArsenal(idUsuario);
 
                         res.json({
                             id: resultadoAutenticar[0].idUsuario,
                             email: resultadoAutenticar[0].email,
                             nome: resultadoAutenticar[0].nome,
-                            senha: resultadoAutenticar[0].senha
+                            senha: resultadoAutenticar[0].senha,
                         });
+
+
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -45,6 +48,26 @@ function autenticar(req, res) {
             );
     }
 
+}
+
+function buscarIdAvatar(req, res) {
+    let idUsuario = req.params.idUsuario;
+
+    usuarioModel.buscarIdAvatar(idUsuario)
+        .then(
+            function (resultadobuscaIdAvatar) {
+                res.json(resultadobuscaIdAvatar);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar dados! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
 }
 
 function autenticarCadastro(req, res) {
@@ -106,5 +129,6 @@ function cadastrar(req, res) {
 module.exports = {
     autenticar,
     autenticarCadastro,
-    cadastrar
+    cadastrar,
+    buscarIdAvatar
 }

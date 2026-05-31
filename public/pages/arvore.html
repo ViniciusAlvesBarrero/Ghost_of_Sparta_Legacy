@@ -7,13 +7,14 @@
     <link rel="icon" href="../assets/img/icon/flavicon.png" type="image/png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/arvore.css">
     <script src="../js/sessao.js"></script>
     <title>God of War Legacy - HUB</title>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), buscarXp(), buscarArsenal(), buscarRequisitos()">
 
-    <div class="header">
+    <div class="header" id="header">
         <img class="logo" src="../assets/img/icon/logo2.png">
 
         <div class="container-btn">
@@ -46,10 +47,250 @@
         </div>
     </div>
 
-    <div class="container">
-
+    <div class="popup" id="popUpMensagem">
+        <button onclick="fecharPopUpSucesso()" class="btn-sucesso" id="btnFecharSucesso">OK</button>
+        <p id="divExibirMensagem"></p>
+    </div>
+    <div class="container" id="container">
+        <div class="container-xp"><img src="../assets/img/icon/iconXp.png"><span id="qtdXp"></span></div>
+        <img src="../assets/img/cards/yggdrasil_simbolo.png" class="icone-yggdrasil">
+        <div class="container-painel">
+            <div class="icon-titulo">ᛘ</div>
+            <h1>YGGDRASIL, A ÁRVORE DO MUNDO</h1>
+            <h1><span>GUIA DE EQUIPAMENTOS</span></h1>
+            <div class="container-arvores">
+                <div class="arvore arvore-manopla">
+                    <div class="container-titulo">
+                        <p>MANOPLAS</p>
+                    </div>
+                    <hr class="divisoria divi1">
+                    <hr class="divisoria divi2">
+                    <hr class="divisoria divi3">
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento2" disabled onclick="comprar(2)"><img
+                                id="simboloAdquirido2" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoAzul.png"><img
+                                src="../assets/img/icon/iconManoplaCouro.png"></button>
+                        <h5>Manoplas de Couro - <span class="preco-xp">50 </span><span class="preco-xp">XP</span></h5>
+                    </div>
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento4" disabled onclick="comprar(4)"><img
+                                id="simboloAdquirido4" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoAzul.png"><img
+                                src="../assets/img/icon/iconManoplaEsplendor.png"></button>
+                        <h5>Manoplas do Esplendor - <span class="preco-xp">250 </span><span class="preco-xp">XP</span>
+                        </h5>
+                    </div>
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento6" disabled onclick="comprar(6)"><img
+                                id="simboloAdquirido6" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoAzul.png"><img
+                                src="../assets/img/icon/iconManoplaZeus.png"></button>
+                        <h5>Manoplas de Zeus - <span class="preco-xp">400 </span><span class="preco-xp">XP</span></h5>
+                    </div>
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento8" disabled onclick="comprar(8)"><img
+                                id="simboloAdquirido8" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoAzul.png"><img
+                                src="../assets/img/icon/iconManoplaSteinbjorn.png"></button>
+                        <h5>Manoplas de Steinbjorn - <span class="preco-xp">600 </span><span class="preco-xp">XP</span>
+                        </h5>
+                    </div>
+                </div>
+                <hr class="divisoria">
+                <div class="arvore arvore-arma">
+                    <div class="container-titulo">
+                        <p>ARMAS</p>
+                    </div>
+                    <hr class="divisoria divi1">
+                    <hr class="divisoria divi2">
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento9" disabled onclick="comprar(9)"><img
+                                id="simboloAdquirido9" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoVermelho.png"><img
+                                src="../assets/img/icon/iconLeviata.png"></button>
+                        <h5>Machado Leviatã - <span class="preco-xp">500 </span><span class="preco-xp">XP</span></h5>
+                    </div>
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento10" disabled onclick="comprar(10)"><img
+                                id="simboloAdquirido10" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoVermelho.png"><img
+                                src="../assets/img/icon/iconDraupnir.png"></button>
+                        <h5>Lança Draupnir - <span class="preco-xp">700 </span><span class="preco-xp">XP</span></h5>
+                    </div>
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento11" disabled onclick="comprar(11)"><img
+                                id="simboloAdquirido11" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoVermelho.png"><img
+                                src="../assets/img/icon/iconLaminasCaos.png"></button>
+                        <h5>Lâminas do Caos - <span class="preco-xp">3600 </span><span class="preco-xp">XP</span></h5>
+                    </div>
+                </div>
+                <hr class="divisoria">
+                <div class="arvore arvore-armadura">
+                    <div class="container-titulo">
+                        <p>ARMADURA</p>
+                    </div>
+                    <hr class="divisoria divi1">
+                    <hr class="divisoria divi2">
+                    <hr class="divisoria divi3">
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento1" disabled onclick="comprar(1)"><img
+                                id="simboloAdquirido1" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoAmarelo.png"><img
+                                src="../assets/img/icon/IconArmaduraCouro.png"></button>
+                        <h5>Armadura de Couro - <span class="preco-xp">200 </span><span class="preco-xp">XP</span></h5>
+                    </div>
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento3" disabled onclick="comprar(3)"><img
+                                id="simboloAdquirido3" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoAmarelo.png"><img
+                                src="../assets/img/icon/IconArmaduraEsplendor.png"></button>
+                        <h5>Armadura do Esplendor - <span class="preco-xp">400 </span><span class="preco-xp">XP</span>
+                        </h5>
+                    </div>
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento5" disabled onclick="comprar(5)"><img
+                                id="simboloAdquirido5" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoAmarelo.png"><img
+                                src="../assets/img/icon/IconArmaduraZeus.png"></button>
+                        <h5>Armadura de Zeus - <span class="preco-xp">500 </span><span class="preco-xp">XP</span></h5>
+                    </div>
+                    <div class="container-btn-equipamento">
+                        <button class="btn-equipamento" id="equipamento7" disabled onclick="comprar(7)"><img
+                                id="simboloAdquirido7" class="simbolo-adquirido"
+                                src="../assets/img/icon/adquiridoAmarelo.png"><img
+                                src="../assets/img/icon/IconArmaduraSteinbjorn.png"></button>
+                        <h5>Armadura de Steinbjorn - <span class="preco-xp">900 </span><span class="preco-xp">XP</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
 
 </html>
+
+<script>
+
+    let idAvatar = sessionStorage.ID_AVATAR;
+
+    function buscarXp() {
+        fetch(`/adquirirEquipamento/buscarQtdXP/${idAvatar}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaXp) {
+                return resultadoBuscaXp.json();
+            })
+            .then(function (dadosXp) {
+                qtdXp.innerHTML = dadosXp[0].xpTotal;
+            })
+            .catch(function (erro) {
+                console.log(erro);
+            })
+    }
+
+    function buscarArsenal() {
+        fetch(`/adquirirEquipamento/buscarArsenal/${idAvatar}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaArsenal) {
+                return resultadoBuscaArsenal.json();
+            })
+            .then(function (dadosArsenal) {
+                desativarBotao(dadosArsenal);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+            })
+    }
+
+    function buscarRequisitos() {
+        fetch(`/adquirirEquipamento/buscarRequisito/${idAvatar}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaRequisito) {
+                return resultadoBuscaRequisito.json();
+            })
+            .then(function (dadosRequisito) {
+                desativarBotaoRequisito(dadosRequisito);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+            })
+    }
+
+    function desativarBotao(dadosArsenal) {
+        for (let i = 0; i < dadosArsenal.length; i++) {
+            let idEquipamento = dadosArsenal[i].idEquipamento;
+            let numero = idEquipamento.replace("equipamento", "");
+
+            let botao = document.getElementById(idEquipamento);
+            let simbolo = document.getElementById(`simboloAdquirido${numero}`);
+
+            botao.style.pointerEvents = "none";
+            botao.style.opacity = "0.6";
+            botao.disabled = true;
+            simbolo.style.opacity = "0.8";
+        }
+    }
+
+    function desativarBotaoRequisito(dadosRequisito) {
+        for (let i = 0; i < dadosRequisito.length; i++) {
+            let botao = document.getElementById(dadosRequisito[i].proximoEquipamento);
+
+            botao.style.pointerEvents = "visible";
+            botao.style.opacity = "1";
+            botao.disabled = false;
+        }
+    }
+
+    function comprar(idBotao) {
+        fetch("/adquirirEquipamento/adquirirEquipamento", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idEquipamentoServer: idBotao,
+                idAvatarServer: idAvatar
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                popUpMensagem.style.display = "flex";
+                container.style.pointerEvents = "none";
+                header.style.pointerEvents = "none";
+                container.style.filter = "brightness(0.4)";
+                header.style.filter = "brightness(0.4)";
+
+                divExibirMensagem.innerHTML = `Equipamento adquirido!`;
+
+            } else {
+                resposta.text().then(mensagemXp => {
+                    popUpMensagem.style.display = "flex";
+                    container.style.pointerEvents = "none";
+                    header.style.pointerEvents = "none";
+                    container.style.filter = "brightness(0.4)";
+                    header.style.filter = "brightness(0.4)";
+
+                    divExibirMensagem.innerHTML = mensagemXp;
+                })
+            }
+        }).catch(function (erro) {
+            console.log(`${erro}<br> Algo deu errado (estou no catch)`);
+        })
+    }
+
+    function fecharPopUpSucesso() {
+        popUpMensagem.style.display = "none";
+        container.style.pointerEvents = "auto";
+        header.style.pointerEvents = "auto";
+        container.style.filter = "brightness(1)";
+        header.style.filter = "brightness(1)";
+        location.reload();
+    }
+
+
+</script>

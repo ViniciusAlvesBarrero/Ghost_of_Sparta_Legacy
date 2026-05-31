@@ -17,4 +17,8 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/buscarIdAvatar/:idUsuario", function (req, res) {
+    usuarioController.buscarIdAvatar(req, res);
+});
+
 module.exports = router;

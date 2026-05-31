@@ -12,7 +12,7 @@
     <title>God of War Legacy - HUB</title>
 </head>
 
-<body onload="validarSessao(), buscarAtributos()">
+<body onload="validarSessao(), buscarAtributos(), buscarIdAvatar()">
 
     <div class="header">
         <img class="logo" src="../assets/img/icon/logo2.png">
@@ -54,10 +54,14 @@
                     <div class="sombra"></div>
                     <img src="../assets/img/icon/logoDourado.png" class="logo-background">
                     <img src="../assets/img/avatar/kratos_avatar.png" class="kratos-avatar">
-                    <img src="../assets/img/avatar/armadura_base.png" class="armadura">
-                    <!--<img src="../assets/img/avatar/armadura_steinbjorn.png" class="armadura"> -->
+                    <!-- <img src="../assets/img/avatar/manopla_steinbjorn.png" class="manopla"> -->
+                    <img src="../assets/img/avatar/manopla_zeus.png" class="manopla">
+                    <!-- <img src="../assets/img/avatar/manopla_esplendor.png" class="manopla"> -->
+                    <!-- <img src="../assets/img/avatar/manopla_couro.png" class="manopla"> -->
+                    <img src="../assets/img/avatar/armadura_steinbjorn.png" class="armadura">
+                    <!-- <img src="../assets/img/avatar/armadura_base.png" class="armadura"> -->
                     <!-- <img src="../assets/img/avatar/armadura_zeus.png" class="armadura"> -->
-                    <!--<img src="../assets/img/avatar/armadura_esplendor.png" class="armadura"> -->
+                    <!-- <img src="../assets/img/avatar/armadura_esplendor.png" class="armadura"> -->
                 </div>
             </div>
         </a>
@@ -90,7 +94,7 @@
                                 <div class="progresso-barra" id="barraVitalidade"></div>
                             </div>
                         </div>
-                        <p class="num-progresso" id="numProgressoVitalidade">100</p>
+                        <p class="num-progresso" id="numProgressoVitalidade">XX</p>
                     </div>
                     <div class="status">
                         <img src="../assets/img/icon/iconForca.png" class="icon-atributo">
@@ -134,9 +138,9 @@
 
 <script>
 
-    function buscarAtributos() {
+    var idUsuario = sessionStorage.ID_USUARIO;
 
-        var idUsuario = sessionStorage.ID_USUARIO;
+    function buscarAtributos() {
 
         fetch(`/obterDados/BuscarDadosAtributos/${idUsuario}`, {
             method: "GET",
@@ -147,13 +151,13 @@
             .then(function (dadosAtributos) {
                 barraForca.style.width = `${dadosAtributos[0].statusForca}%`;
                 numProgressoForca.innerHTML = dadosAtributos[0].statusForca;
-                
+
                 barraVitalidade.style.width = `${dadosAtributos[0].statusVitalidade}%`;
                 numProgressoVitalidade.innerHTML = dadosAtributos[0].statusVitalidade;
-                
+
                 barraDefesa.style.width = `${dadosAtributos[0].statusDefesa}%`;
                 numProgressoDefesa.innerHTML = dadosAtributos[0].statusDefesa;
-                
+
                 barraVelocidade.style.width = `${dadosAtributos[0].statusVelocidade}%`;
                 numProgressoVelocidade.innerHTML = dadosAtributos[0].statusVelocidade;
             })
@@ -161,6 +165,25 @@
                 console.log(err);
             })
 
+    }
+
+    function buscarIdAvatar() {
+        fetch(`/usuarios/buscarIdAvatar/${idUsuario}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaIdAvatar) {
+                return resultadoBuscaIdAvatar.json();
+            })
+            .then(function (dadosIdAvatar) {
+                if (dadosIdAvatar.length > 0) {
+                    sessionStorage.ID_AVATAR = dadosIdAvatar[0].idAvatar;
+                } else {
+                    console.log("Houve erro ao buscar o id do avatar!");
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
     }
 
 </script>
