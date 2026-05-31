@@ -12,7 +12,7 @@
     <title>God of War Legacy - HUB</title>
 </head>
 
-<body onload="validarSessao(), buscarAtributos(), buscarIdAvatar()">
+<body onload="validarSessao(), buscarAtributos(), buscarIdAvatar(), buscarProgressoArvore()">
 
     <div class="header">
         <img class="logo" src="../assets/img/icon/logo2.png">
@@ -73,9 +73,9 @@
                     <img src="../assets/img/cards/yggdrasil_circulo.png" class="yggdrasil-circulo">
                     <div class="container-progresso">
                         <div class="container-linha">
-                            <p>30%</p>
+                            <p class="porcentagem-yggdrasil" id="porcentagemYggdrasil">XX%</p>
                             <div class="linha-progresso">
-                                <div class="progresso"></div>
+                                <div class="progresso" id="progresso"></div>
                             </div>
                         </div>
                     </div>
@@ -140,6 +140,25 @@
 
     var idUsuario = sessionStorage.ID_USUARIO;
 
+    function buscarIdAvatar() {
+        fetch(`/usuarios/buscarIdAvatar/${idUsuario}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaIdAvatar) {
+                return resultadoBuscaIdAvatar.json();
+            })
+            .then(function (dadosIdAvatar) {
+                if (dadosIdAvatar.length > 0) {
+                    sessionStorage.ID_AVATAR = dadosIdAvatar[0].idAvatar;
+                } else {
+                    console.log("Houve erro ao buscar o id do avatar!");
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    }
+
     function buscarAtributos() {
 
         fetch(`/obterDados/BuscarDadosAtributos/${idUsuario}`, {
@@ -167,23 +186,23 @@
 
     }
 
-    function buscarIdAvatar() {
-        fetch(`/usuarios/buscarIdAvatar/${idUsuario}`, {
+    function buscarProgressoArvore() {
+
+        fetch(`/obterDados/BuscarDadosProgressoArvore/${idUsuario}`, {
             method: "GET",
         })
-            .then(function (resultadoBuscaIdAvatar) {
-                return resultadoBuscaIdAvatar.json();
+            .then(function (resultadoBuscaProgressoArvore) {
+                return resultadoBuscaProgressoArvore.json();
             })
-            .then(function (dadosIdAvatar) {
-                if (dadosIdAvatar.length > 0) {
-                    sessionStorage.ID_AVATAR = dadosIdAvatar[0].idAvatar;
-                } else {
-                    console.log("Houve erro ao buscar o id do avatar!");
-                }
+            .then(function (dadosProgressoArvore) {
+               let porcentagem = ((dadosProgressoArvore[0].equipamentosArsenal/11) * 100).toFixed(1);
+               progresso.style.width = `${porcentagem}%`;
+               porcentagemYggdrasil.innerHTML = `${porcentagem}%`;
             })
             .catch(function (err) {
                 console.log(err);
             })
+
     }
 
 </script>

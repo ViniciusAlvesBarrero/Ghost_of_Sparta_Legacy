@@ -23,4 +23,8 @@ router.get("/buscarDadosXpDiario/:idUsuario", function (req, res) {
     ObterDadosGraficos.buscarXpDiario(req, res);
 });
 
+router.get("/BuscarDadosProgressoArvore/:idUsuario", function (req, res) {
+    ObterDadosGraficos.BuscarDadosProgressoArvore(req, res);
+});
+
 module.exports = router;

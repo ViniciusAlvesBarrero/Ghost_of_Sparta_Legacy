@@ -189,6 +189,11 @@
     height: auto;
 }
 
+.porcentagem-yggdrasil {
+    font-family: 'Times New Roman' !important;
+    font-size: 19px;
+}
+
 .container-linha p {
     color: rgb(175, 159, 147);
     font-family: 'constantia';
@@ -206,7 +211,7 @@
 
 .progresso {
     height: 100%;
-    width: 30%;
+    width: 0%;
     background-color: rgb(255, 171, 26);
 }
 

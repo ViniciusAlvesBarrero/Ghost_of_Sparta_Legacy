@@ -88,10 +88,21 @@ function buscarXpDiario(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function BuscarDadosProgressoArvore(idUsuario) {
+    var instrucaoSql = `
+        SELECT COUNT(fkEquipamento) AS equipamentosArsenal FROM arsenal
+            WHERE fkAvatar = ${idUsuario}
+            AND fkEquipamento <> 12;
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarDadosXp,
     buscarDadosQuiz,
     buscarDadosAtributos,
     buscarMeta, 
-    buscarXpDiario
+    buscarXpDiario,
+    BuscarDadosProgressoArvore
 };
