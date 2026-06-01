@@ -18,7 +18,17 @@ function atualizarManopla(idManopla, idAvatar) {
     return database.executar(instrucaoSql);
 };
 
+function atualizarArma(idArma, idAvatar) {
+    var instrucaoSql = `
+        UPDATE equipamento_selecionado SET fkArma = ${idArma}
+            WHERE fkAvatar = ${idAvatar};
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+};
+
 module.exports = {
     atualizarArmadura,
-    atualizarManopla
+    atualizarManopla,
+    atualizarArma
 }

@@ -66,6 +66,11 @@
                     <img src="../assets/img/avatar/armadura_base.png" class="armadura" id="armadura1">
                     <img src="../assets/img/avatar/armadura_zeus.png" class="armadura" id="armadura5">
                     <img src="../assets/img/avatar/armadura_esplendor.png" class="armadura" id="armadura3">
+                    <div class="container-arma">
+                        <img class="arma-conjunto" src="../assets/img/cards/leviata_card.png" id="arma9">
+                        <img class="arma-conjunto" src="../assets/img/cards/draupnir_card.png" id="arma10">
+                        <img class="arma-conjunto" src="../assets/img/cards/laminas_card.png" id="arma11">
+                    </div>
                 </div>
             </div>
         </a>
@@ -222,10 +227,12 @@
             })
             .then(function (dadosSetAtual) {
                 let armadura = dadosSetAtual[0].armadura;
-                let manoplas = dadosSetAtual[0].manoplas
-
+                let manoplas = dadosSetAtual[0].manoplas;
+                let arma = dadosSetAtual[0].arma;
+                
                 document.getElementById(armadura.toLowerCase()).style.display = "flex";
                 document.getElementById(manoplas.toLowerCase()).style.display = "flex";
+                document.getElementById(arma.toLowerCase()).style.display = "flex";
             })
             .catch(function (err) {
                 console.log(err);

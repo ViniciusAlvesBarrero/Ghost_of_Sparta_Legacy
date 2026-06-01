@@ -37,6 +37,25 @@
     display: none;
 }
 
+.container-arma {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 50px;
+    right: 60px;
+    width: 140px;
+    height: 140px;
+    background-color: rgb(0, 0, 0);
+    border: solid 1px rgba(255, 171, 26, 0.8);
+    border-radius: 100%;
+}
+
+.container-arma img {
+    display: none;
+    height: 120px;
+}
+
 .logo-background {
     position: absolute;
     width: 300px;

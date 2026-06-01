@@ -1,38 +1,38 @@
 var express = require("express");
 var router = express.Router();
 
-var ObterDadosGraficos = require("../controllers/ObterDadosGraficosController");
+var ObterDados = require("../controllers/ObterDadosController");
 
 router.get("/buscarDadosXp/:idUsuario", function (req, res) {
-    ObterDadosGraficos.buscarDadosXp(req, res);
+    ObterDados.buscarDadosXp(req, res);
 });
 
 router.get("/buscarDadosQuiz/:idUsuario", function (req, res) {
-    ObterDadosGraficos.buscarDadosQuiz(req, res);
+    ObterDados.buscarDadosQuiz(req, res);
 });
 
 router.get("/buscarDadosAtributos/:idUsuario", function (req, res) {
-    ObterDadosGraficos.buscarDadosAtributos(req, res);
+    ObterDados.buscarDadosAtributos(req, res);
 });
 
 router.get("/buscarDadosMeta/:idUsuario", function (req, res) {
-    ObterDadosGraficos.buscarMeta(req, res);
+    ObterDados.buscarMeta(req, res);
 });
 
 router.get("/buscarDadosXpDiario/:idUsuario", function (req, res) {
-    ObterDadosGraficos.buscarXpDiario(req, res);
+    ObterDados.buscarXpDiario(req, res);
 });
 
 router.get("/BuscarDadosProgressoArvore/:idUsuario", function (req, res) {
-    ObterDadosGraficos.BuscarDadosProgressoArvore(req, res);
+    ObterDados.BuscarDadosProgressoArvore(req, res);
 });
 
 router.get("/BuscarDadosSetAtual/:idAvatar", function (req, res) {
-    ObterDadosGraficos.BuscarDadosSetAtual(req, res);
+    ObterDados.BuscarDadosSetAtual(req, res);
 });
 
 router.get("/BuscarDadosArsenal/:idAvatar", function (req, res) {
-    ObterDadosGraficos.BuscarDadosArsenal(req, res);
+    ObterDados.BuscarDadosArsenal(req, res);
 });
 
 module.exports = router;
