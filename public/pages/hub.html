@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/pages.css">
     <link rel="stylesheet" href="../css/hub.css">
     <script src="../js/sessao.js"></script>
+    <script src="../js/buscarXp.js"></script>
     <title>God of War Legacy - HUB</title>
 </head>
 
@@ -48,20 +49,23 @@
     </div>
 
     <div class="container">
+        <div class="container-xp"><img src="../assets/img/icon/iconXp.png">
+            <span id="qtdXp"></span>
+        </div>
         <a href="arsenal.html">
             <div class="posicao-container-avatar">
                 <div class="container-avatar">
                     <div class="sombra"></div>
                     <img src="../assets/img/icon/logoDourado.png" class="logo-background">
                     <img src="../assets/img/avatar/kratos_avatar.png" class="kratos-avatar">
-                    <!-- <img src="../assets/img/avatar/manopla_steinbjorn.png" class="manopla"> -->
-                    <img src="../assets/img/avatar/manopla_zeus.png" class="manopla">
-                    <!-- <img src="../assets/img/avatar/manopla_esplendor.png" class="manopla"> -->
-                    <!-- <img src="../assets/img/avatar/manopla_couro.png" class="manopla"> -->
-                    <img src="../assets/img/avatar/armadura_steinbjorn.png" class="armadura">
-                    <!-- <img src="../assets/img/avatar/armadura_base.png" class="armadura"> -->
-                    <!-- <img src="../assets/img/avatar/armadura_zeus.png" class="armadura"> -->
-                    <!-- <img src="../assets/img/avatar/armadura_esplendor.png" class="armadura"> -->
+                    <img src="../assets/img/avatar/manopla_steinbjorn.png" class="manopla" id="manopla8">
+                    <img src="../assets/img/avatar/manopla_zeus.png" class="manopla" id="manopla6">
+                    <img src="../assets/img/avatar/manopla_esplendor.png" class="manopla" id="manopla4">
+                    <img src="../assets/img/avatar/manopla_couro.png" class="manopla" id="manopla2">
+                    <img src="../assets/img/avatar/armadura_steinbjorn.png" class="armadura" id="armadura7">
+                    <img src="../assets/img/avatar/armadura_base.png" class="armadura" id="armadura1">
+                    <img src="../assets/img/avatar/armadura_zeus.png" class="armadura" id="armadura5">
+                    <img src="../assets/img/avatar/armadura_esplendor.png" class="armadura" id="armadura3">
                 </div>
             </div>
         </a>
@@ -138,7 +142,7 @@
 
 <script>
 
-    var idUsuario = sessionStorage.ID_USUARIO;
+    let idUsuario = sessionStorage.ID_USUARIO;
 
     function buscarIdAvatar() {
         fetch(`/usuarios/buscarIdAvatar/${idUsuario}`, {
@@ -150,6 +154,9 @@
             .then(function (dadosIdAvatar) {
                 if (dadosIdAvatar.length > 0) {
                     sessionStorage.ID_AVATAR = dadosIdAvatar[0].idAvatar;
+                    idAvatar = dadosIdAvatar[0].idAvatar;
+                    buscarSetAtual();
+                    buscarXp();
                 } else {
                     console.log("Houve erro ao buscar o id do avatar!");
                 }
@@ -195,9 +202,30 @@
                 return resultadoBuscaProgressoArvore.json();
             })
             .then(function (dadosProgressoArvore) {
-               let porcentagem = ((dadosProgressoArvore[0].equipamentosArsenal/11) * 100).toFixed(1);
-               progresso.style.width = `${porcentagem}%`;
-               porcentagemYggdrasil.innerHTML = `${porcentagem}%`;
+                let porcentagem = ((dadosProgressoArvore[0].equipamentosArsenal / 11) * 100).toFixed(1);
+                progresso.style.width = `${porcentagem}%`;
+                porcentagemYggdrasil.innerHTML = `${porcentagem}%`;
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+
+    }
+
+    function buscarSetAtual() {
+
+        fetch(`/obterDados/BuscarDadosSetAtual/${idAvatar}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaSetAtual) {
+                return resultadoBuscaSetAtual.json();
+            })
+            .then(function (dadosSetAtual) {
+                let armadura = dadosSetAtual[0].armadura;
+                let manoplas = dadosSetAtual[0].manoplas
+
+                document.getElementById(armadura.toLowerCase()).style.display = "flex";
+                document.getElementById(manoplas.toLowerCase()).style.display = "flex";
             })
             .catch(function (err) {
                 console.log(err);

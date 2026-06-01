@@ -494,7 +494,7 @@ function registrar() {
 function somarXp() {
 
     fetch("/quiz/atualizarXp", {
-        method: "POST",
+        method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },

@@ -27,4 +27,12 @@ router.get("/BuscarDadosProgressoArvore/:idUsuario", function (req, res) {
     ObterDadosGraficos.BuscarDadosProgressoArvore(req, res);
 });
 
+router.get("/BuscarDadosSetAtual/:idAvatar", function (req, res) {
+    ObterDadosGraficos.BuscarDadosSetAtual(req, res);
+});
+
+router.get("/BuscarDadosArsenal/:idAvatar", function (req, res) {
+    ObterDadosGraficos.BuscarDadosArsenal(req, res);
+});
+
 module.exports = router;

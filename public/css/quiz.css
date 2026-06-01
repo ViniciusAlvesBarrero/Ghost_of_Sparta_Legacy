@@ -258,6 +258,7 @@ body {
     background-color: rgb(14, 16, 26);
     overflow: hidden;
     z-index: 1;
+    filter: brightness(0.75);
 }
 
 .container-mensagem-final h1 {
@@ -281,7 +282,7 @@ body {
 .container-mensagem-final h3 {
     color: rgb(255, 255, 255);
     font-family: 'constantia';
-    font-size: 23px;
+    font-size: 26px;
 }
 
 .container-mensagem-final .numero-mensagem {
@@ -354,6 +355,8 @@ body {
     width: 630px;
     transform: rotate(45deg);
     opacity: 0.15;
+    user-select: none;
+    pointer-events: none;
 }
 
 .brilho1{

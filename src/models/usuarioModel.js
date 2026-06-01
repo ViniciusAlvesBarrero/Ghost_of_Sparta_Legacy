@@ -27,7 +27,6 @@ function autenticarCadastro(email) {
     return database.executar(instrucaoSql);
 }
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, email, senha) {
     var instrucaoSql = `
         INSERT INTO usuario (nome, email, senha, xpTotal, metaXp) VALUES ('${nome}', '${email}', '${senha}', 0, 0);

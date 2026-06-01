@@ -3,7 +3,7 @@ var router = express.Router();
 
 var registrarMeta = require("../controllers/registrarMetaController");
 
-router.post("/registrarMeta/", function (req, res) {
+router.put("/registrarMeta/", function (req, res) {
     registrarMeta.registrarMeta(req, res);
 });
 

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/img/icon/flavicon.png" type="image/png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/arsenal.css">
+    <script src="../js/sessao.js"></script>
+    <title>Quiz - God of War I</title>
+</head>
+
+<body onload="validarSessao(), buscarSetAtual(), buscarArsenal()">
+
+    <div class="fundo fundo-arsenal">
+
+        <div class="header">
+            <div class="titulo">
+                <img src="../assets/img/icon/flavicon.png" class="logo">
+                <p>ARSENAL</p>
+            </div>
+            <div class="container-perfil">
+                <div class="icon-usuario">
+                    <img class="img-usuario" src="../assets/img/icon/usuarioDefault.png">
+                </div>
+                <p id="divNomeUsuario">Usuário</p>
+                <hr class="divisoria">
+                <button class="btn-logout" onclick="limparSessao()"><span
+                        class="material-symbols-outlined">logout</span>Sair</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <a href="hub.html">
+                <button class="btn-voltar" id="backBtn"><img class="back-img"
+                        src="../assets/img/icon/backBtn.png"></button>
+            </a>
+            <div class="posicao-container-avatar">
+                <div class="container-avatar">
+                    <div class="sombra"></div>
+                    <img src="../assets/img/icon/flavicon.png" class="logo-background">
+                    <img src="../assets/img/avatar/kratos_avatar.png" class="kratos-avatar">
+                    <img src="../assets/img/avatar/manopla_steinbjorn.png" class="manopla" id="manopla8">
+                    <img src="../assets/img/avatar/manopla_zeus.png" class="manopla" id="manopla6">
+                    <img src="../assets/img/avatar/manopla_esplendor.png" class="manopla" id="manopla4">
+                    <img src="../assets/img/avatar/manopla_couro.png" class="manopla" id="manopla2">
+                    <img src="../assets/img/avatar/armadura_steinbjorn.png" class="armadura" id="armadura7">
+                    <img src="../assets/img/avatar/armadura_base.png" class="armadura" id="armadura1">
+                    <img src="../assets/img/avatar/armadura_zeus.png" class="armadura" id="armadura5">
+                    <img src="../assets/img/avatar/armadura_esplendor.png" class="armadura" id="armadura3">
+                </div>
+            </div>
+            <div class="grade-equipamentos">
+                <div class="card-equipamento" id="equipamento1">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Armadura</span>
+                        <img src="../assets/img/equipamentos/armadura_base.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Armadura de Couro</span>
+                        <p class="descricao-equipamento">Armadura inicial simples, resistente e equilibrada.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>3.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>4.4</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>3.6</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>3.6</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarArmadura(1)">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento2">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Manopla</span>
+                        <img src="../assets/img/equipamentos/manopla_couro.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Manopla de Couro</span>
+                        <p class="descricao-equipamento">Manoplas simples utilizadas por guerreiros iniciantes.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>3.6</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>2.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>2.4</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>3.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarManopla(2)">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento3">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Armadura</span>
+                        <img src="../assets/img/equipamentos/armadura_esplendor.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Armadura do Esplendor</span>
+                        <p class="descricao-equipamento">Armadura luminosa inspirada em reinos élficos.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>9.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>12.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>9.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>18.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarArmadura(3)">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento4">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Manopla</span>
+                        <img src="../assets/img/equipamentos/manopla_esplendor.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Manopla do Esplendor</span>
+                        <p class="descricao-equipamento">Manoplas leves e rápidas em combate.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>7.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>6.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>5.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>13.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarManopla(4)">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento5">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Armadura</span>
+                        <img src="../assets/img/equipamentos/armadura_zeus.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Armadura de Zeus</span>
+                        <p class="descricao-equipamento">Armadura do rei do Olimpo, ofensiva e veloz.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>15.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>8.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>6.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>17.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarArmadura(5)">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento6">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Manopla</span>
+                        <img src="../assets/img/equipamentos/manopla_zeus.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Manopla de Zeus</span>
+                        <p class="descricao-equipamento">Manoplas elétricas de alto impacto.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>12.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>4.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>1.6</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>15.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarManopla(6)">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento7">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Armadura</span>
+                        <img src="../assets/img/equipamentos/armadura_steinbjorn.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Armadura de Steinbjorn</span>
+                        <p class="descricao-equipamento">Armadura colossal de pedra mística.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>13.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>50.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>30.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>1.6</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarArmadura(7)">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento8">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Manopla</span>
+                        <img src="../assets/img/equipamentos/manopla_steinbjorn.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Manopla de Steinbjorn</span>
+                        <p class="descricao-equipamento">Manoplas pesadas e defensivas.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>8.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>26.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>24.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>1.6</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarManopla(8)">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento9">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Arma</span>
+                        <img class="img-arma girar-machado" src="../assets/img/cards/leviata_card.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Machado Leviatã</span>
+                        <p class="descricao-equipamento">Machado lendário de gelo.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>28.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>4.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>0.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento10">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Arma</span>
+                        <img class="img-arma" src="../assets/img/cards/draupnir_card.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Lança Draupnir</span>
+                        <p class="descricao-equipamento">Uma Lança forjada com o anel mágico que se multiplica.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>34.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>28.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar">Equipar</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento11">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Arma</span>
+                        <img class="img-arma" src="../assets/img/cards/laminas_card.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Lâminas do Caos</span>
+                        <p class="descricao-equipamento">Lâminas ancestrais da destruição absoluta.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>46.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>0.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar">Equipar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</body>
+
+<script>
+
+    let idAvatar = sessionStorage.ID_AVATAR;
+
+    function buscarSetAtual() {
+
+        fetch(`/obterDados/BuscarDadosSetAtual/${idAvatar}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaSetAtual) {
+                return resultadoBuscaSetAtual.json();
+            })
+            .then(function (dadosSetAtual) {
+                let armadura = dadosSetAtual[0].armadura;
+                let manoplas = dadosSetAtual[0].manoplas
+
+                document.getElementById(armadura.toLowerCase()).style.display = "flex";
+                document.getElementById(manoplas.toLowerCase()).style.display = "flex";
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+
+    }
+
+    function buscarArsenal() {
+
+        fetch(`/obterDados/BuscarDadosArsenal/${idAvatar}`, {
+            method: "GET",
+        })
+            .then(function (resultadoBuscaArsenal) {
+                return resultadoBuscaArsenal.json();
+            })
+            .then(function (dadosArsenal) {
+                for (let i = 0; i < dadosArsenal.length; i++) {
+                    let equipamento = dadosArsenal[i].idEquipamento;
+                    document.getElementById(equipamento.toLowerCase()).style.display = "flex";
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+            })
+
+    }
+
+    function atualizarArmadura(idArmadura) {
+
+        fetch("/atualizarSet/atualizarArmadura", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idAvatarServer: idAvatar,
+                idArmaduraServer: idArmadura
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                console.log(`${resposta}<br> Set atualizado com sucesso`);
+                location.reload();
+
+            } else {
+                console.log(`${resposta}<br> Algo deu errado, armadura não atualizada`);
+            }
+
+        }).catch(function (erro) {
+            console.log(`${erro}<br> Algo deu errado (estou no catch)`);
+        })
+
+    }
+
+    function atualizarManopla(idManopla) {
+
+        fetch("/atualizarSet/atualizarManopla", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idAvatarServer: idAvatar,
+                idManoplaServer: idManopla
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                console.log(`${resposta}<br> Set atualizado com sucesso`);
+                location.reload();
+
+            } else {
+                console.log(`${resposta}<br> Algo deu errado, armadura não atualizada`);
+            }
+
+        }).catch(function (erro) {
+            console.log(`${erro}<br> Algo deu errado (estou no catch)`);
+        })
+
+    }
+
+</script>

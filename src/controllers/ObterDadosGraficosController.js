@@ -131,11 +131,55 @@ function BuscarDadosProgressoArvore(req, res) {
         );
 }
 
+function BuscarDadosSetAtual(req, res) {
+
+    let idAvatar = req.params.idAvatar;
+
+    obterDadosModel.BuscarDadosSetAtual(idAvatar)
+        .then(
+            function (resultadoBuscaSetAtual) {
+                    res.json(resultadoBuscaSetAtual);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar dados! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function BuscarDadosArsenal(req, res) {
+
+    let idAvatar = req.params.idAvatar;
+
+    obterDadosModel.BuscarDadosArsenal(idAvatar)
+        .then(
+            function (resultadoBuscaArsenal) {
+                    res.json(resultadoBuscaArsenal);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar dados! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     buscarDadosXp,
     buscarDadosQuiz,
     buscarDadosAtributos,
     buscarMeta,
     buscarXpDiario,
-    BuscarDadosProgressoArvore
+    BuscarDadosProgressoArvore,
+    BuscarDadosSetAtual,
+    BuscarDadosArsenal
 }

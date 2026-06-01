@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="../css/pages.css">
     <link rel="stylesheet" href="../css/hubQuiz.css">
     <script src="../js/sessao.js"></script>
-    <title>God of War Legacy - HUB</title>
+    <script src="../js/buscarXp.js"></script>
+    <title>God of War Legacy - HUB QUIZ</title>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), buscarXp()">
 
     <div class="header">
         <img class="logo" src="../assets/img/icon/logo2.png">
@@ -48,30 +49,33 @@
     </div>
 
     <div class="container">
-        <div class="container-conteudo">
-        <h1>Escolha o Quiz da saga do <span>Deus da Guerra</span></h1>
-        <div class="cards-quiz">
-            <div class="card gow1">
-                <img src="../assets/img/icon/logoGow1.png" class="logo-cards">
-                <a href="quizGow1.html"><button class="btn-entrar" >Entrar no Quiz</button></a>
-            </div>
-            <div class="card gow2">
-                <img src="../assets/img/icon/logoGow2.png" class="logo-cards">
-                <a href="quizGow2.html"><button class="btn-entrar">Entrar no Quiz</button></a>
-            </div>
-            <div class="card gow3">
-                <img src="../assets/img/icon/logoGow3.png" class="logo-cards">
-                <a href="quizGow3.html"><button class="btn-entrar">Entrar no Quiz</button></a>
-            </div>
-            <div class="card gow18">
-                <img src="../assets/img/icon/logoGow18.png" class="logo-cards">
-                <a href="quizGow18.html"><button class="btn-entrar">Entrar no Quiz</button></a>
-            </div>
-            <div class="card gow-rag">
-                <img src="../assets/img/icon/logoRag.png" class="logo-cards">
-                <a href="quizGowRag.html"><button class="btn-entrar">Entrar no Quiz</button></a>
-            </div>
+        <div class="container-xp"><img src="../assets/img/icon/iconXp.png">
+            <span id="qtdXp"></span>
         </div>
+        <div class="container-conteudo">
+            <h1>Escolha o Quiz da saga do <span>Deus da Guerra</span></h1>
+            <div class="cards-quiz">
+                <div class="card gow1">
+                    <img src="../assets/img/icon/logoGow1.png" class="logo-cards">
+                    <a href="quizGow1.html"><button class="btn-entrar">Entrar no Quiz</button></a>
+                </div>
+                <div class="card gow2">
+                    <img src="../assets/img/icon/logoGow2.png" class="logo-cards">
+                    <a href="quizGow2.html"><button class="btn-entrar">Entrar no Quiz</button></a>
+                </div>
+                <div class="card gow3">
+                    <img src="../assets/img/icon/logoGow3.png" class="logo-cards">
+                    <a href="quizGow3.html"><button class="btn-entrar">Entrar no Quiz</button></a>
+                </div>
+                <div class="card gow18">
+                    <img src="../assets/img/icon/logoGow18.png" class="logo-cards">
+                    <a href="quizGow18.html"><button class="btn-entrar">Entrar no Quiz</button></a>
+                </div>
+                <div class="card gow-rag">
+                    <img src="../assets/img/icon/logoRag.png" class="logo-cards">
+                    <a href="quizGowRag.html"><button class="btn-entrar">Entrar no Quiz</button></a>
+                </div>
+            </div>
         </div>
     </div>
 

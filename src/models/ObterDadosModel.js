@@ -3,8 +3,6 @@ var database = require("../database/config")
 function buscarDadosXp(idUsuario) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", idUsuario);
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
     var instrucaoSql = `
         SELECT 
             SUM(xp) AS qtdXp, 
@@ -98,11 +96,43 @@ function BuscarDadosProgressoArvore(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function BuscarDadosSetAtual(idAvatar) {
+    var instrucaoSql = `
+        SELECT 
+            CONCAT(e_armadura.tipo, e_armadura.idEquipamento) AS armadura,
+            CONCAT(e_manoplas.tipo, e_manoplas.idEquipamento) AS manoplas,
+            CONCAT(e_arma.tipo, e_arma.idEquipamento) AS arma
+        FROM equipamento_selecionado es
+            JOIN equipamento e_armadura ON e_armadura.idEquipamento = es.fkArmadura
+            JOIN equipamento e_manoplas ON e_manoplas.idEquipamento = es.fkManoplas
+            JOIN equipamento e_arma ON e_arma.idEquipamento = es.fkArma
+        WHERE es.fkAvatar = ${idAvatar};
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function BuscarDadosArsenal(idAvatar) {
+    var instrucaoSql = `
+        SELECT 
+            CONCAT("equipamento", e.idEquipamento) AS idEquipamento
+        FROM equipamento e
+            JOIN arsenal a ON fkEquipamento = idEquipamento
+            WHERE a.fkAvatar = ${idAvatar}
+            AND e.idEquipamento <> 12
+            ORDER BY e.idEquipamento;
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarDadosXp,
     buscarDadosQuiz,
     buscarDadosAtributos,
-    buscarMeta, 
+    buscarMeta,
     buscarXpDiario,
-    BuscarDadosProgressoArvore
+    BuscarDadosProgressoArvore,
+    BuscarDadosSetAtual,
+    BuscarDadosArsenal
 };

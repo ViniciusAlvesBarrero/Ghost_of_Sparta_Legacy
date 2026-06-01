@@ -30,7 +30,11 @@
     transition: 1s;
     pointer-events: none;
     user-select: none;
+}
 
+.armadura, 
+.manopla{
+    display: none;
 }
 
 .logo-background {

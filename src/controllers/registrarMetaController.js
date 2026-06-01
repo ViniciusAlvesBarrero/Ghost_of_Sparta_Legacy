@@ -1,11 +1,9 @@
 var definirMetaModel = require("../models/definirMetaModel");
 
 function registrarMeta(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var meta = req.body.metaServer;
     var idUsuario = req.body.idUsuarioServer;
 
-    // Faça as validações dos valores
     if (meta == undefined) {
         res.status(400).send("Sua meta está indefinida!");
     } else {

@@ -3,7 +3,7 @@ var router = express.Router();
 
 var adquirirEquipamentoController = require("../controllers/adquirirEquipamentoController");
 
-router.post("/adquirirEquipamento/", function (req, res) {
+router.put("/adquirirEquipamento/", function (req, res) {
     adquirirEquipamentoController.adquirirEquipamento(req, res);
 });
 

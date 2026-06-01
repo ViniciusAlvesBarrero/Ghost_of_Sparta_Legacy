@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="../css/pages.css">
     <link rel="stylesheet" href="../css/arvore.css">
     <script src="../js/sessao.js"></script>
-    <title>God of War Legacy - HUB</title>
+    <script src="../js/buscarXp.js"></script>
+    <title>God of War Legacy - Arvore Yggdrasil</title>
 </head>
 
 <body onload="validarSessao(), buscarXp(), buscarArsenal(), buscarRequisitos()">
@@ -52,7 +53,9 @@
         <p id="divExibirMensagem"></p>
     </div>
     <div class="container" id="container">
-        <div class="container-xp"><img src="../assets/img/icon/iconXp.png"><span id="qtdXp"></span></div>
+        <div class="container-xp"><img src="../assets/img/icon/iconXp.png">
+            <span id="qtdXp"></span>
+        </div>
         <img src="../assets/img/cards/yggdrasil_simbolo.png" class="icone-yggdrasil">
         <div class="container-painel">
             <div class="icon-titulo">ᛘ</div>
@@ -175,23 +178,6 @@
 
 <script>
 
-    let idAvatar = sessionStorage.ID_AVATAR;
-
-    function buscarXp() {
-        fetch(`/adquirirEquipamento/buscarQtdXP/${idAvatar}`, {
-            method: "GET",
-        })
-            .then(function (resultadoBuscaXp) {
-                return resultadoBuscaXp.json();
-            })
-            .then(function (dadosXp) {
-                qtdXp.innerHTML = dadosXp[0].xpTotal;
-            })
-            .catch(function (erro) {
-                console.log(erro);
-            })
-    }
-
     function buscarArsenal() {
         fetch(`/adquirirEquipamento/buscarArsenal/${idAvatar}`, {
             method: "GET",
@@ -249,7 +235,7 @@
 
     function comprar(idBotao) {
         fetch("/adquirirEquipamento/adquirirEquipamento", {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
