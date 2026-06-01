@@ -3,5 +3,6 @@ node_modules
 package-lock.json
 public/assets/video/saga.mp4
 .env.dev
+.env
 
 .github
