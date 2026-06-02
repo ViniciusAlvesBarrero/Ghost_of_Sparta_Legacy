@@ -45,7 +45,6 @@ CREATE TABLE equipamento (
     nome VARCHAR(45),
     precoXp INT,
     tipo VARCHAR(45),
-    descricao VARCHAR(100),
     bonusForca DECIMAL(3,2),
     bonusVelocidade DECIMAL(3,2),
     bonusVitalidade DECIMAL(3,2),
@@ -88,19 +87,21 @@ CREATE TABLE requisito_equipamento (
 );
 
 INSERT INTO equipamento 
-(nome, precoXp, tipo, descricao, bonusForca, bonusVelocidade, bonusVitalidade, bonusDefesa) VALUES
-('Armadura de Couro', 200, 'armadura', 'Armadura inicial simples, resistente e equilibrada para as primeiras batalhas.', 0.15, 0.18, 0.18, 0.22),
-('Manopla de Couro', 50, 'manopla', 'Manoplas simples utilizadas por guerreiros iniciantes.', 0.18, 0.15, 0.12, 0.10),
-('Armadura do Esplendor', 400, 'armadura', 'Armadura luminosa inspirada em reinos élficos.', 0.45, 0.90, 0.45, 0.60),
-('Manopla do Esplendor', 250, 'manopla', 'Manoplas leves e rápidas em combate.', 0.35, 0.65, 0.25, 0.30),
-('Armadura de Zeus', 500, 'armadura', 'Armadura do rei do Olimpo, ofensiva e veloz.', 0.75, 0.85, 0.30, 0.40),
-('Manopla de Zeus', 400, 'manopla', 'Manoplas elétricas de alto impacto.', 0.60, 0.75, 0.08, 0.20),
-('Armadura de Steinbjorn', 900, 'armadura', 'Armadura colossal de pedra mística.', 0.65, 0.08, 1.50, 2.50),
-('Manopla de Steinbjorn', 600, 'manopla', 'Manoplas pesadas e defensivas.', 0.40, 0.08, 1.20, 1.30),
-('Machado Leviatã', 500, 'arma', 'Machado lendário de gelo.', 1.40, 0, 0, 0.20),
-('Lança Draupnir', 700, 'arma', 'A Lança Draupnir é a arma lendária forjada com o anel mágico que se multiplica', 1.70, 1.40, 0.00, 0.00),
-('Lâminas do Caos', 3600, 'arma', 'Lâminas ancestrais da destruição absoluta.', 2.30, 0.00, 0.00, 0.00),
-('Vazio', 0, 'arma', 'Kratos sem equipamento', 0.00, 0.00, 0.00, 0.00);
+(nome, precoXp, tipo, bonusForca, bonusVelocidade, bonusVitalidade, bonusDefesa) VALUES
+('Armadura de Couro', 200, 'armadura', 0.15, 0.18, 0.18, 0.22),
+('Manopla de Couro', 50, 'manopla', 0.18, 0.15, 0.12, 0.10),
+('Armadura do Esplendor', 400, 'armadura', 0.45, 0.90, 0.45, 0.60),
+('Manopla do Esplendor', 250, 'manopla', 0.35, 0.65, 0.25, 0.30),
+('Armadura de Zeus', 500, 'armadura', 0.75, 0.85, 0.30, 0.40),
+('Manopla de Zeus', 400, 'manopla', 0.60, 0.75, 0.08, 0.20),
+('Armadura de Steinbjorn', 900, 'armadura', 0.65, 0.08, 1.50, 2.50),
+('Manopla de Steinbjorn', 600, 'manopla', 0.40, 0.08, 1.20, 1.30),
+('Machado Leviatã', 500, 'arma', 1.40, 0, 0, 0.20),
+('Lança Draupnir', 700, 'arma', 1.70, 1.40, 0.00, 0.00),
+('Lâminas do Caos', 3600, 'arma', 2.30, 0.00, 0.00, 0.00),
+('Vazio', 0, 'arma', 0.00, 0.00, 0.00, 0.00),
+('Vazio', 0, 'manopla', 0.00, 0.00, 0.00, 0.00),
+('Vazio', 0, 'armadura', 0.00, 0.00, 0.00, 0.00);
 
 INSERT INTO requisito_equipamento (fkEquipamento, fkEquipamentoAntecessor) VALUES
 (1, 12),
