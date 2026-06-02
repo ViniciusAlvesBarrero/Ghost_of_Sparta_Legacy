@@ -227,11 +227,11 @@ function definirPerguntas(quiz) {
         listaDeQuestoes = [
 
             {
-                pergunta: "Qual personagem acompanha Kratos na busca por Tyr em God of War Ragnarök?",
+                pergunta: "Qual personagem acompanha Kratos na busca por Tyr no início de God of War Ragnarök?",
                 alternativaA: "Freya",
                 alternativaB: "Atreus",
-                alternativaC: "Mimir",
-                alternativaD: "Brok",
+                alternativaC: "Freyr",
+                alternativaD: "Sindri",
                 alternativaCorreta: "alternativaB"
             },
 
