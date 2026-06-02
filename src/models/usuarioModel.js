@@ -52,7 +52,7 @@ function criarAvatar(idUsuario) {
 function criarSet(idUsuario) {
     var instrucaoSql = `
         INSERT INTO equipamento_selecionado (fkAvatar, fkArmadura, fkManoplas, fkArma)
-            SELECT a.idAvatar, 12, 12, 12
+            SELECT a.idAvatar, 14, 13, 12
             FROM avatar a
             WHERE a.fkUsuario = ${idUsuario}
             AND NOT EXISTS (

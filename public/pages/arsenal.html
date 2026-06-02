@@ -50,7 +50,10 @@
                     <img src="../assets/img/avatar/armadura_base.png" class="armadura" id="armadura1">
                     <img src="../assets/img/avatar/armadura_zeus.png" class="armadura" id="armadura5">
                     <img src="../assets/img/avatar/armadura_esplendor.png" class="armadura" id="armadura3">
-                    <div class="container-arma">
+                    <img src="../assets/img/avatar/vazio.png" class="armadura" id="arma12">
+                    <img src="../assets/img/avatar/vazio.png" class="armadura" id="manopla13">
+                    <img src="../assets/img/avatar/vazio.png" class="armadura" id="armadura14">
+                    <div class="container-arma" id="containerArma">
                         <img class="arma-conjunto" src="../assets/img/cards/leviata_card.png" id="arma9">
                         <img class="arma-conjunto" src="../assets/img/cards/draupnir_card.png" id="arma10">
                         <img class="arma-conjunto" src="../assets/img/cards/laminas_card.png" id="arma11">
@@ -58,6 +61,100 @@
                 </div>
             </div>
             <div class="grade-equipamentos">
+                <div class="card-equipamento" id="equipamento14" style="display:flex;">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Armadura</span>
+                        <img class="sem-equipamento" src="../assets/img/equipamentos/sem_armadura.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Sem Armadura</span>
+                        <p class="descricao-equipamento">Remove a armadura equipada do Kratos.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>0.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarArmadura(14)">Remover</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento13" style="display:flex;">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Manopla</span>
+                        <img class="sem-equipamento" src="../assets/img/equipamentos/sem_manopla.png">
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Sem Manopla</span>
+                        <p class="descricao-equipamento">Remove as manoplas equipadas do Kratos.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>0.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarManopla(13)">Remover</button>
+                    </div>
+                </div>
+
+                <div class="card-equipamento" id="equipamento12" style="display:flex;">
+                    <div class="imagem-equipamento">
+                        <span class="tipo-equipamento">Arma</span>
+                        <img src="../assets/img/equipamentos/sem_arma.png">
+
+                    </div>
+                    <div class="corpo-card">
+                        <span class="nome-equipamento">Sem Arma</span>
+                        <p class="descricao-equipamento">Remove a arma equipada do Kratos.</p>
+                        <hr class="separador">
+                        <div class="grade-bonus">
+                            <div class="bonus forca">
+                                <h2>Força</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus defesa">
+                                <h2>Defesa</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus vitalidade">
+                                <h2>Vitalidade</h2>
+                                <span>0.0</span>
+                            </div>
+                            <div class="bonus velocidade">
+                                <h2>Velocidade</h2>
+                                <span>0.0</span>
+                            </div>
+                        </div>
+                        <button class="btn-equipar" onclick="atualizarArma(12)">Remover</button>
+                    </div>
+                </div>
+
                 <div class="card-equipamento" id="equipamento1">
                     <div class="imagem-equipamento">
                         <span class="tipo-equipamento">Armadura</span>
@@ -419,10 +516,20 @@
                 let armadura = dadosSetAtual[0].armadura;
                 let manoplas = dadosSetAtual[0].manoplas;
                 let arma = dadosSetAtual[0].arma;
+                let containerArma = document.getElementById("containerArma");
+
+                console.log("arma:", arma);
+                console.log("armadura:", armadura);
+                console.log("manoplas:", manoplas);
 
                 document.getElementById(armadura.toLowerCase()).style.display = "flex";
                 document.getElementById(manoplas.toLowerCase()).style.display = "flex";
                 document.getElementById(arma.toLowerCase()).style.display = "flex";
+                if (arma.toLowerCase() == "arma12") {
+                    containerArma.style.display = "none";
+                } else {
+                    containerArma.style.display = "flex";
+                }
             })
             .catch(function (err) {
                 console.log(err);

@@ -56,7 +56,6 @@
             <div class="posicao-container-avatar">
                 <div class="container-avatar">
                     <div class="sombra"></div>
-                    <img src="../assets/img/icon/logoDourado.png" class="logo-background">
                     <img src="../assets/img/avatar/kratos_avatar.png" class="kratos-avatar">
                     <img src="../assets/img/avatar/manopla_steinbjorn.png" class="manopla" id="manopla8">
                     <img src="../assets/img/avatar/manopla_zeus.png" class="manopla" id="manopla6">
@@ -66,7 +65,10 @@
                     <img src="../assets/img/avatar/armadura_base.png" class="armadura" id="armadura1">
                     <img src="../assets/img/avatar/armadura_zeus.png" class="armadura" id="armadura5">
                     <img src="../assets/img/avatar/armadura_esplendor.png" class="armadura" id="armadura3">
-                    <div class="container-arma">
+                    <img src="../assets/img/avatar/vazio.png" class="armadura" id="arma12">
+                    <img src="../assets/img/avatar/vazio.png" class="armadura" id="manopla13">
+                    <img src="../assets/img/avatar/vazio.png" class="armadura" id="armadura14">
+                    <div class="container-arma" id="containerArma">
                         <img class="arma-conjunto" src="../assets/img/cards/leviata_card.png" id="arma9">
                         <img class="arma-conjunto" src="../assets/img/cards/draupnir_card.png" id="arma10">
                         <img class="arma-conjunto" src="../assets/img/cards/laminas_card.png" id="arma11">
@@ -229,10 +231,14 @@
                 let armadura = dadosSetAtual[0].armadura;
                 let manoplas = dadosSetAtual[0].manoplas;
                 let arma = dadosSetAtual[0].arma;
-                
+                let containerArma = document.getElementById("containerArma");
+
                 document.getElementById(armadura.toLowerCase()).style.display = "flex";
                 document.getElementById(manoplas.toLowerCase()).style.display = "flex";
                 document.getElementById(arma.toLowerCase()).style.display = "flex";
+                if (arma.toLowerCase() == "arma12") {
+                    containerArma.style.display = "none";
+                }
             })
             .catch(function (err) {
                 console.log(err);

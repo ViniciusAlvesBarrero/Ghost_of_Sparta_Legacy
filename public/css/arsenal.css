@@ -144,7 +144,7 @@ body {
 }
 
 .container-arma {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -264,6 +264,11 @@ body {
 
 .card-equipamento:hover .img-arma{
     width: 130px !important;
+}
+
+.sem-equipamento {
+    height: 160px;
+    width: 320px !important;
 }
 
 .girar-machado {
