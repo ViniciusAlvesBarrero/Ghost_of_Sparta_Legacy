@@ -44,14 +44,14 @@ O banco de dados foi modelado para gerenciar usuários, experiência, equipament
 
 ### Principais Entidades
 
-usuario: dados dos usuários cadastrados.
-avatar: atributos do personagem Kratos.
-equipamento: itens disponíveis para compra e equipagem.
-arsenal: equipamentos adquiridos pelo usuário.
-equipamento_selecionado: itens atualmente equipados.
-experiencia: histórico de XP obtido.
-acertosQuiz: desempenho dos usuários nos quizzes.
-requisito_equipamento: pré-requisitos para desbloqueio de equipamentos.
+- usuario: dados dos usuários cadastrados.
+- avatar: atributos do personagem Kratos.
+- equipamento: itens disponíveis para compra e equipagem.
+- arsenal: equipamentos adquiridos pelo usuário.
+- equipamento_selecionado: itens atualmente equipados.
+- experiencia: histórico de XP obtido.
+- acertosQuiz: desempenho dos usuários nos quizzes.
+- requisito_equipamento: pré-requisitos para desbloqueio de equipamentos.
 
 ## ODS Relacionada
 
