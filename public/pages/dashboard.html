@@ -68,12 +68,6 @@
         <h4><span id="nomeQuiz"></span></h4>
         <p><span id="qtdAcertos">X</span> / 5 acertos</p>
       </div>
-      <!-- <div class="kpi">
-        <h3>Meta de abates por batalha<img class="icon-kpi" src="../assets/img/icon/iconAbates.png"></h3>
-        <p><span id="porcentagemAbatesRealidade">60</span>% (Mínimo esperado: <span
-            id="porcentagemAbatesEsperado">66,67</span>%)</p>
-        <h4><span id="qtdDerrotados">9</span> / <span id="metaDerrotados">15</span> inimigos derrotados</h4>
-      </div> -->
     </div>
     <div class="container-graficos">
       <div class="grafico">
@@ -85,9 +79,6 @@
       <div class="grafico grafico-maior">
         <canvas id="graficoAcertosQuiz"></canvas>
       </div>
-      <!-- <div class="grafico">
-        <canvas id="graficoQtdDerrotados"></canvas>
-      </div> -->
     </div>
   </div>
 
@@ -365,62 +356,6 @@
       }
     });
   }
-
-  const ctx3 = document.getElementById('graficoQtdDerrotados');
-
-  new Chart(ctx3, {
-    type: 'line',
-    data: {
-      labels: ['Tentativa 1', 'Tentativa 2', 'Tentativa 3', 'Tentativa 4', 'Tentativa 5'],
-      datasets: [{
-        label: 'Quantidade de inimigos derrotados',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: 'rgba(139, 26, 26, 0.85)',
-        borderColor: 'rgb(201, 146, 42)',
-        borderWidth: 1.5,
-        hoverBackgroundColor: 'rgba(180, 40, 40, 0.95)',
-        hoverBorderColor: 'rgb(240, 192, 64)',
-        hoverBorderWidth: 2,
-        borderRadius: 3,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Quantidade de inimigos derrotados nas últimas 5 tentativas',
-          color: 'rgb(201, 146, 42)',
-          font: { family: 'Georgia, serif', size: 18, weight: 'bold' },
-          padding: { bottom: 16 }
-        },
-        tooltip: {
-          backgroundColor: 'rgb(26, 18, 8)',
-          titleColor: 'rgb(201, 146, 42)',
-          bodyColor: 'rgb(232, 213, 163)',
-          borderColor: 'rgb(122, 92, 30)',
-          borderWidth: 1,
-          callbacks: {
-            label: (ctx) => ` ${ctx.parsed.y} inimigos`
-          }
-        }
-      },
-      scales: {
-        x: {
-          grid: { color: 'rgba(122, 92, 30, 0.15)' },
-          border: { color: 'rgb(122, 92, 30)' },
-          ticks: { color: 'rgb(201, 146, 42)', font: { family: 'Georgia, serif', weight: 'bold' } }
-        },
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(122, 92, 30, 0.15)' },
-          border: { color: 'rgb(122, 92, 30)', dash: [4, 4] },
-          ticks: { color: 'rgb(201, 146, 42)' }
-        }
-      }
-    }
-  });
 
   function plotarGraficoAtributos(dadosAtributos) {
 

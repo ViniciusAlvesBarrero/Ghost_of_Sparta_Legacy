@@ -36,7 +36,7 @@ function atualizarManopla(req, res) {
             function (erro) {
                 console.log(erro);
                 console.log(
-                    "\nHouve um erro ao atualizar a armadura! Erro: ",
+                    "\nHouve um erro ao atualizar a manopla! Erro: ",
                     erro.sqlMessage
                 );
                 res.status(500).json(erro.sqlMessage);
@@ -58,7 +58,7 @@ function atualizarArma(req, res) {
             function (erro) {
                 console.log(erro);
                 console.log(
-                    "\nHouve um erro ao atualizar a armadura! Erro: ",
+                    "\nHouve um erro ao atualizar a arma! Erro: ",
                     erro.sqlMessage
                 );
                 res.status(500).json(erro.sqlMessage);

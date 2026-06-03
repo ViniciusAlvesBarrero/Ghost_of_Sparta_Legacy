@@ -1,4 +1,3 @@
-// variáveis globais    
 let numeroDaQuestaoAtual = 0;
 let certas = 0;
 let qtdXp = 0;
@@ -340,18 +339,17 @@ function avancar() {
 }
 
 function tentarNovamente() {
-    // atualiza a página
     window.location.reload()
 }
 
 function checarResposta() {
-    const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-    const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
+    const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] 
+    const respostaQuestaoAtual = questaoAtual.alternativaCorreta 
 
-    const options = document.getElementsByName("option"); // recupera alternativas no html
+    const options = document.getElementsByName("option");
     let tamanhoOptions = options.length
 
-    let alternativaCorreta = null // variável para armazenar a alternativa correta
+    let alternativaCorreta = null 
 
     for (let i = 0; i < tamanhoOptions; i++) {
         if (options[i].value === respostaQuestaoAtual) {
@@ -360,7 +358,7 @@ function checarResposta() {
         }
     }
 
-    // verifica se resposta assinalada é correta
+  
     for (let i = 0; i < tamanhoOptions; i++) {
         if (options[i].checked === true && options[i].value === respostaQuestaoAtual) {
             certas++

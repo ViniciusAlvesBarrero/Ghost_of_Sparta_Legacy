@@ -39,7 +39,7 @@ function atualizarXp(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao registrar dados do quiz! Erro: ",
+                        "\nHouve um erro ao atualizar o xp! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
